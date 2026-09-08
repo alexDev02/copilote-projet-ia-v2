@@ -1,0 +1,33 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "rules": {
+    "no-restricted-properties": [
+      "error",
+      {
+        "object": "*",
+        "property": "innerHTML",
+        "message": "innerHTML interdit (risque XSS). Utiliser les helpers de src/utils/dom.ts."
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/explicit-function-return-type": "warn",
+    "@typescript-eslint/no-floating-promises": "error",
+    "no-console": "warn"
+  },
+  "ignorePatterns": ["dist", "node_modules", "*.config.ts"]
+}

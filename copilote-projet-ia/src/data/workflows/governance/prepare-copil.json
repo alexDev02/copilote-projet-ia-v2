@@ -1,0 +1,303 @@
+{
+  "id": "prepare-copil",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Préparer un COPIL",
+    "shortTitle": "COPIL",
+    "description": "Cadrer, analyser l'avancement, préparer les arbitrages et générer un support de Comité de Pilotage orienté décision.",
+    "category": "gouvernance",
+    "icon": "presentation",
+    "difficulty": "intermediaire",
+    "estimatedMinutes": 30,
+    "tags": ["COPIL", "gouvernance", "reporting", "décision"]
+  },
+  "objective": {
+    "title": "Préparer un COPIL fiable et orienté décision",
+    "description": "Analyser la situation du projet avant de produire le support du COPIL, puis contrôler le résultat avant diffusion."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": [
+      "Dernier compte-rendu de COPIL",
+      "Planning mis à jour",
+      "Registre des risques",
+      "Suivi budgétaire",
+      "Suivi des actions"
+    ]
+  },
+  "steps": [
+    {
+      "id": "define-objective",
+      "order": 1,
+      "type": "input",
+      "title": "Définir l'objectif du COPIL",
+      "objective": "Clarifier la période couverte et les décisions attendues pour ne traiter que les sujets à forte valeur ajoutée.",
+      "why": "Un COPIL efficace ne doit pas traiter plus de 3 arbitrages majeurs. Cadrer l'instance en amont évite de la diluer.",
+      "inputs": [
+        {
+          "id": "copil-period",
+          "label": "Période couverte",
+          "type": "text",
+          "required": true,
+          "placeholder": "Septembre 2026"
+        },
+        {
+          "id": "copil-goals",
+          "label": "Objectifs et décisions attendues",
+          "type": "textarea",
+          "required": true,
+          "placeholder": "Validation du planning, arbitrage sur le surcoût de la prestation..."
+        }
+      ],
+      "documents": [],
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler les documents nécessaires à une analyse factuelle par l'IA.",
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
+      "inputs": [],
+      "documents": [
+        {
+          "label": "Dernier COPIL",
+          "required": false,
+          "purpose": "Comprendre les décisions et actions précédentes."
+        },
+        {
+          "label": "Planning projet",
+          "required": false,
+          "purpose": "Analyser l'avancement et les écarts."
+        },
+        {
+          "label": "Registre des risques",
+          "required": false,
+          "purpose": "Identifier les risques actuels."
+        },
+        {
+          "label": "Suivi budgétaire",
+          "required": false,
+          "purpose": "Objectiver les dérives éventuelles."
+        }
+      ],
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "analyze-situation",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Analyser la situation",
+      "objective": "Obtenir une analyse factuelle de l'avancement, des écarts, des risques et des retards avant toute production.",
+      "why": "Ne demandez pas encore à l'IA de produire le COPIL. L'IA sert ici d'auditeur neutre.",
+      "instructions": {
+        "before": "Joignez les documents disponibles à votre conversation IA.",
+        "action": "Demandez à l'IA d'analyser la situation, sans rédiger le support.",
+        "after": "Relisez l'analyse avant de poursuivre."
+      },
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Analyser la situation du projet",
+        "purpose": "Obtenir une analyse factuelle avant production",
+        "template": "Sur la base des documents joints à cette conversation et du contexte projet ci-dessus, réalise une analyse synthétique de l'avancement, des écarts de planning, des dérives budgétaires, des risques critiques et des retards à porter à la connaissance du COPIL pour la période : {{step.title}}. Ne rédige pas encore le support, produis uniquement l'analyse.",
+        "variables": ["project.name", "project.methodology", "step.title"]
+      },
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
+        "checklist": [
+          { "id": "progress", "label": "L'avancement est clairement identifié.", "required": true },
+          {
+            "id": "deviations",
+            "label": "Les écarts principaux sont identifiés.",
+            "required": true
+          },
+          { "id": "risks", "label": "Les risques importants sont identifiés.", "required": true }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    },
+    {
+      "id": "clarify-questions",
+      "order": 4,
+      "type": "ai_question",
+      "title": "Identifier les informations manquantes",
+      "objective": "Faire remonter par l'IA les questions nécessaires pour compléter le contexte avant production.",
+      "why": "Une IA qui pose des questions pertinentes a généralement mieux compris le sujet qu'une IA qui répond immédiatement.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Identifier les informations manquantes",
+        "purpose": "Compléter le contexte avant la production du support",
+        "template": "Identifie les informations manquantes nécessaires pour préparer correctement ce COPIL et pose-moi les questions correspondantes, une par une si besoin.",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "challenge-analysis",
+      "order": 5,
+      "type": "ai_challenge",
+      "title": "Challenger l'analyse",
+      "objective": "Faire challenger l'analyse par l'IA pour détecter risques sous-estimés, incohérences et angles morts.",
+      "why": "Le challenge systématique évite de présenter un COPIL trop optimiste ou incomplet.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Challenger l'analyse",
+        "purpose": "Détecter les angles morts avant production",
+        "template": "Challenge l'analyse précédente : identifie les risques sous-estimés, les incohérences, les informations contradictoires, les problèmes non identifiés et les décisions insuffisamment préparées.",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "produce-copil",
+      "order": 6,
+      "type": "ai_production",
+      "title": "Construire le support de COPIL",
+      "objective": "Générer le support de COPIL structuré à partir de l'analyse validée et challengée.",
+      "why": "La production n'intervient qu'après analyse, clarification et challenge — jamais avant.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Construire le COPIL",
+        "purpose": "Produire le support final",
+        "template": "En te basant sur l'analyse validée et challengée précédemment, construis le support de COPIL avec la structure suivante : 1. Synthèse exécutive, 2. Avancement, 3. Planning, 4. Budget, 5. Risques, 6. Points d'attention, 7. Décisions attendues, 8. Actions, 9. Prochaines étapes. {{preferences.detailLevel}}",
+        "variables": ["preferences.detailLevel"],
+        "sections": [
+          { "type": "role", "title": "Rôle", "content": "Agis comme un PMO senior expérimenté." },
+          {
+            "type": "task",
+            "title": "Tâche",
+            "content": "Structurer le support de COPIL à partir de l'analyse validée."
+          },
+          {
+            "type": "rules",
+            "title": "Règles",
+            "items": [
+              "Ne crée aucune information.",
+              "Distingue les faits des hypothèses.",
+              "Signale les informations manquantes."
+            ]
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "review-copil",
+      "order": 7,
+      "type": "ai_review",
+      "title": "Auditer le COPIL",
+      "objective": "Faire auditer le support produit pour détecter ambiguïtés, incohérences et décisions insuffisamment explicites.",
+      "why": "Un dernier contrôle par l'IA elle-même, en posture d'auditeur, complète la relecture humaine.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Auditer le COPIL",
+        "purpose": "Contrôle qualité avant diffusion",
+        "template": "Analyse ce COPIL comme un PMO senior et identifie les informations ambiguës, les incohérences, les risques oubliés, les décisions insuffisamment explicites et les éléments qui nécessitent une validation humaine.",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "finalize",
+      "order": 8,
+      "type": "checklist",
+      "title": "Finaliser et valider",
+      "objective": "Valider humainement le support avant diffusion aux parties prenantes.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de diffuser, vérifiez chacun des points suivants.",
+        "checklist": [
+          {
+            "id": "decisions",
+            "label": "Les décisions attendues sont explicites.",
+            "required": true
+          },
+          { "id": "actions", "label": "Les actions ont un responsable.", "required": true },
+          { "id": "deadlines", "label": "Les échéances sont définies.", "required": true },
+          {
+            "id": "risks-visible",
+            "label": "Les risques critiques sont visibles.",
+            "required": true
+          },
+          { "id": "verified", "label": "Les données ont été vérifiées.", "required": true },
+          {
+            "id": "no-hallucination",
+            "label": "Aucune information n'a été inventée par l'IA.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    }
+  ],
+  "finalChecklist": [
+    { "id": "decisions", "label": "Les décisions attendues sont explicites.", "required": true },
+    { "id": "actions", "label": "Les actions ont un responsable.", "required": true },
+    { "id": "deadlines", "label": "Les échéances sont identifiées.", "required": true },
+    { "id": "risks", "label": "Les risques critiques sont visibles.", "required": true },
+    { "id": "facts", "label": "Les données importantes ont été vérifiées.", "required": true },
+    {
+      "id": "hallucinations",
+      "label": "Aucune information n'a été inventée par l'IA.",
+      "required": true
+    }
+  ],
+  "completion": {
+    "message": "Votre COPIL est prêt à être finalisé.",
+    "nextWorkflowSuggestions": ["prepare-arbitrage", "prepare-communication"]
+  }
+}

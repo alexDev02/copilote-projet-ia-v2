@@ -1,0 +1,579 @@
+/* ==========================================================================
+   Copilote Projet IA — Charte graphique "outil pro"
+   Bleu guide l'action ; le reste reste blanc / noir / gris.
+   Pas de gradient, pas de glassmorphism, pas d'ombre forte, pas de néon.
+   ========================================================================== */
+
+/*
+  Police : Inter, self-hostée pour respecter une CSP stricte (voir README
+  "Polices" pour l'ajout du fichier variable font dans /public/fonts/).
+  Fallback système tant que le fichier n'est pas ajouté.
+*/
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Couleurs */
+  --color-blue: #0b3d91;
+  --color-blue-dark: #082b66;
+  --color-blue-pale: #eaf0fb;
+  --color-black: #111111;
+  --color-text-secondary: #5f6b7a;
+  --color-grey-light: #f5f7fa;
+  --color-border: #d9e0ea;
+  --color-bg: #ffffff;
+  --color-success: #16803c;
+  --color-warning: #a66a00;
+
+  /* Typographie */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-size-h1: 30px;
+  --font-size-h2: 23px;
+  --font-size-h3: 17px;
+  --font-size-body: 15px;
+  --font-size-small: 13px;
+
+  /* Rayons / hauteurs */
+  --radius-button: 6px;
+  --radius-card: 8px;
+  --button-height: 40px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body);
+  color: var(--color-black);
+  background: var(--color-bg);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 12px;
+  font-weight: 600;
+  color: var(--color-black);
+}
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: 700;
+}
+h2 {
+  font-size: var(--font-size-h2);
+}
+h3 {
+  font-size: var(--font-size-h3);
+}
+p {
+  margin: 0 0 12px;
+  color: var(--color-text-secondary);
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ---------- Layout ---------- */
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.header__logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--color-blue);
+  color: #fff;
+  font-weight: 700;
+}
+
+.header__logo-text {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-black);
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__context-pill {
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: var(--font-size-small);
+  background: var(--color-grey-light);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+.header__context-pill.is-configured {
+  background: var(--color-blue-pale);
+  color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.header__link {
+  background: none;
+  border: none;
+  color: var(--color-blue);
+  cursor: pointer;
+  font-size: var(--font-size-body);
+}
+.header__link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Boutons ---------- */
+
+.btn {
+  height: var(--button-height);
+  padding: 0 18px;
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: opacity 0.15s ease;
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn:not(:disabled):hover {
+  opacity: 0.9;
+}
+
+.btn--primary {
+  background: var(--color-blue);
+  color: #fff;
+}
+.btn--secondary {
+  background: #fff;
+  color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  text-align: center;
+  padding: 56px 0 40px;
+}
+.hero__title {
+  font-size: 34px;
+  font-weight: 700;
+}
+.hero__tagline {
+  font-size: 18px;
+  color: var(--color-black);
+}
+.hero__promise {
+  font-style: italic;
+}
+.hero__search {
+  max-width: 480px;
+  margin: 24px auto 0;
+}
+
+.search-input {
+  width: 100%;
+  height: var(--button-height);
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-body);
+}
+.search-input:focus {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 1px;
+}
+
+/* ---------- Catalogue ---------- */
+
+.catalogue__title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.workflow-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 18px;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.workflow-card:hover,
+.workflow-card:focus-visible {
+  border-color: var(--color-blue);
+  outline: none;
+}
+
+.workflow-card__meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+.workflow-card__category {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-blue);
+  font-weight: 600;
+}
+.workflow-card__title {
+  margin: 0;
+  font-size: 17px;
+}
+.workflow-card__description {
+  font-size: var(--font-size-small);
+  margin: 0;
+}
+.workflow-card__cta {
+  margin-top: auto;
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  color: var(--color-blue);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--color-text-secondary);
+  padding: 32px 0;
+}
+
+/* ---------- Formulaires ---------- */
+
+.field-group {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 16px 18px 4px;
+  margin-bottom: 16px;
+}
+.field-group legend {
+  padding: 0 6px;
+  font-weight: 600;
+  font-size: var(--font-size-small);
+  color: var(--color-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.field {
+  margin-bottom: 14px;
+}
+.field label {
+  display: block;
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  font-family: inherit;
+  font-size: var(--font-size-body);
+  color: var(--color-black);
+  background: #fff;
+}
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 1px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* ---------- Workflow ---------- */
+
+.stepper {
+  margin-bottom: 8px;
+}
+.stepper__label {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+}
+.stepper__track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-grey-light);
+  margin-top: 6px;
+  overflow: hidden;
+}
+.stepper__fill {
+  height: 100%;
+  background: var(--color-blue);
+}
+
+.workflow-step-title {
+  margin-top: 4px;
+}
+
+.block {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  background: #fff;
+}
+.block h3 {
+  margin-bottom: 8px;
+}
+.block__note {
+  font-size: var(--font-size-small);
+  font-style: italic;
+}
+.block__why {
+  font-size: var(--font-size-small);
+  background: var(--color-grey-light);
+  padding: 10px 12px;
+  border-radius: var(--radius-button);
+}
+
+.document-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+}
+.document-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--font-size-small);
+}
+.document-list li:last-child {
+  border-bottom: none;
+}
+.document-list__purpose {
+  color: var(--color-text-secondary);
+  text-align: right;
+}
+
+.prompt-box {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--color-grey-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  padding: 14px;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 13px;
+  color: var(--color-black);
+  margin-bottom: 10px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 0;
+}
+.checklist-item input[type='checkbox'] {
+  margin-top: 3px;
+  accent-color: var(--color-blue);
+}
+
+.workflow-nav__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.page--completion {
+  text-align: center;
+}
+.checklist--recap {
+  text-align: left;
+  max-width: 420px;
+  margin: 0 auto 24px;
+}
+.checklist--recap li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ---------- Formation ---------- */
+
+.training-module-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.training-module-list__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+.training-module-list__index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-blue-pale);
+  color: var(--color-blue);
+  font-weight: 700;
+  font-size: var(--font-size-small);
+}
+
+/* ---------- Modale ---------- */
+
+.modal__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+.modal__dialog {
+  background: #fff;
+  border-radius: var(--radius-card);
+  max-width: 560px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+}
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.modal__close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Toasts ---------- */
+
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 200;
+}
+.toast {
+  padding: 10px 16px;
+  border-radius: var(--radius-button);
+  font-size: var(--font-size-small);
+  color: #fff;
+  background: var(--color-black);
+}
+.toast--success {
+  background: var(--color-success);
+}
+.toast--error {
+  background: #b3261e;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .header {
+    padding: 12px 16px;
+  }
+  .page {
+    padding: 20px 16px 48px;
+  }
+  .hero__title {
+    font-size: 26px;
+  }
+  .workflow-nav__row {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+  .workflow-nav__row .btn {
+    width: 100%;
+  }
+}

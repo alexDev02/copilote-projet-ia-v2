@@ -24,7 +24,14 @@ npm run build       # build de production dans dist/
 
 ## Déploiement
 
-Le déploiement est automatique via GitHub Actions (`.github/workflows/deploy.yml`) à chaque push sur `main` : typecheck → lint → format → build → publication sur GitHub Pages.
+Le déploiement utilise le mode natif **"GitHub Actions"** de GitHub Pages (pas de branche `gh-pages` à créer manuellement).
+
+**Configuration à faire une seule fois sur GitHub.com (pas dans le Codespace) :**
+
+1. Repo → **Settings → Pages** → section **Build and deployment → Source** → sélectionner **"GitHub Actions"** (et non "Deploy from a branch").
+2. Si l'onglet **Actions** affiche un message du type *"Workflows aren't being run on this repository"*, cliquer sur **"I understand my workflows, go ahead and enable them"**.
+
+Ensuite, chaque push sur `main` déclenche `.github/workflows/deploy.yml` : typecheck → lint → format → build → publication directe sur GitHub Pages via `actions/upload-pages-artifact` + `actions/deploy-pages`. L'URL de l'app apparaît dans l'onglet **Actions**, sur le job `deploy`, ou dans Settings → Pages une fois le premier déploiement terminé.
 
 Le script `deploy-update.sh` enchaîne install, vérifications, build, commit et push.
 

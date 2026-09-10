@@ -466,6 +466,8 @@ button {
   border-bottom: 1px solid var(--color-border);
 }
 
+/* ---------- Formation ---------- */
+
 .training-module-list {
   list-style: none;
   padding: 0;
@@ -477,73 +479,23 @@ button {
 .training-module-list__item {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   padding: 14px 16px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
-  cursor: pointer;
-}
-.training-module-list__item:hover,
-.training-module-list__item:focus-visible {
-  border-color: var(--color-blue);
-  outline: none;
-}
-.training-module-list__item.is-done {
-  background: var(--color-blue-pale);
 }
 .training-module-list__index {
-  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: var(--color-blue-pale);
   color: var(--color-blue);
   font-weight: 700;
   font-size: var(--font-size-small);
 }
-.training-module-list__body {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-}
-.training-module-list__title {
-  font-weight: 600;
-  color: var(--color-black);
-}
-.training-module-list__summary {
-  font-size: var(--font-size-small);
-  color: var(--color-text-secondary);
-}
-.training-module-list__duration {
-  flex-shrink: 0;
-  font-size: var(--font-size-small);
-  color: var(--color-text-secondary);
-}
-
-.page--training-reader .btn {
-  margin-bottom: 16px;
-}
-.training-section {
-  margin-bottom: 20px;
-}
-.training-section__bullets {
-  margin: 0;
-  padding-left: 20px;
-}
-.training-section__bullets li {
-  margin-bottom: 6px;
-  font-size: var(--font-size-body);
-  color: var(--color-black);
-}
-.block--takeaways {
-  background: var(--color-blue-pale);
-  border-color: var(--color-blue);
-}
-
 
 /* ---------- Modale ---------- */
 

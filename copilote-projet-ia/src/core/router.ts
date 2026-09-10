@@ -3,7 +3,6 @@ export type Route =
   | { readonly name: 'context' }
   | { readonly name: 'workflow'; readonly workflowId: string }
   | { readonly name: 'training' }
-  | { readonly name: 'training-module'; readonly moduleId: string }
   | { readonly name: 'not-found' };
 
 function parseHash(hash: string): Route {
@@ -12,7 +11,6 @@ function parseHash(hash: string): Route {
 
   if (!segment || segment === '') return { name: 'home' };
   if (segment === 'context') return { name: 'context' };
-  if (segment === 'training' && param) return { name: 'training-module', moduleId: param };
   if (segment === 'training') return { name: 'training' };
   if (segment === 'workflow' && param) return { name: 'workflow', workflowId: param };
   return { name: 'not-found' };

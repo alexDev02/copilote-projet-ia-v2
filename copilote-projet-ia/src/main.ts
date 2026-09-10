@@ -3,7 +3,7 @@ import { createRouter } from '@/core/router';
 import { renderHomePage } from '@/pages/home';
 import { renderContextPage } from '@/pages/context';
 import { renderWorkflowPage } from '@/pages/workflow';
-import { renderTrainingPage, renderTrainingModulePage } from '@/pages/training';
+import { renderTrainingPage } from '@/pages/training';
 import { el, mount } from '@/utils/dom';
 
 const root = document.getElementById('app');
@@ -36,12 +36,6 @@ createRouter((route) => {
       break;
     case 'training':
       renderTrainingPage(root, { onNavigateHome: goHome, onNavigateContext: goContext });
-      break;
-    case 'training-module':
-      renderTrainingModulePage(root, route.moduleId, {
-        onNavigateHome: goHome,
-        onNavigateContext: goContext,
-      });
       break;
     case 'workflow':
       renderWorkflowPage(root, {

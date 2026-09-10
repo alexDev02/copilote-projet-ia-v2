@@ -1,0 +1,161 @@
+{
+  "id": "analyser-risque",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Analyser un risque",
+    "shortTitle": "Risque",
+    "description": "Évaluer un risque projet, en challenger l'analyse et produire un plan d'action de mitigation crédible.",
+    "category": "risques",
+    "icon": "warning",
+    "difficulty": "intermediaire",
+    "estimatedMinutes": 25,
+    "tags": ["risque", "mitigation", "registre des risques"]
+  },
+  "objective": {
+    "title": "Évaluer un risque de façon rigoureuse",
+    "description": "Éviter le double piège du risque sous-estimé et du plan d'action générique, en challengeant systématiquement l'analyse initiale."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": ["Registre des risques", "Planning", "Compte rendu de la dernière revue de risques"]
+  },
+  "steps": [
+    {
+      "id": "describe-risk",
+      "order": 1,
+      "type": "input",
+      "title": "Décrire le risque",
+      "objective": "Formuler précisément l'événement redouté et son contexte d'apparition.",
+      "why": "Un risque mal formulé (trop vague ou déjà un problème avéré) est impossible à traiter correctement.",
+      "inputs": [
+        { "id": "risk-description", "label": "Description du risque", "type": "textarea", "required": true, "placeholder": "Ex : Le prestataire externe pourrait ne pas livrer l'environnement de test avant la date prévue." },
+        { "id": "risk-context", "label": "Contexte d'apparition", "type": "textarea", "required": false, "placeholder": "Ce qui a déclenché ou fait suspecter ce risque." }
+      ],
+      "documents": [],
+      "navigation": { "allowBack": false, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler les éléments permettant une évaluation objective.",
+      "instructions": { "action": "Ajoutez ces documents directement dans votre conversation avec votre IA." },
+      "inputs": [],
+      "documents": [
+        { "label": "Registre des risques", "required": false, "purpose": "Vérifier si le risque est déjà identifié ou lié à un autre." },
+        { "label": "Planning", "required": false, "purpose": "Évaluer l'impact potentiel sur les jalons." }
+      ],
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "analyze-risk",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Analyser probabilité et impact",
+      "objective": "Obtenir une évaluation factuelle de la probabilité et de l'impact du risque.",
+      "why": "L'évaluation doit précéder toute proposition de solution.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Analyser le risque",
+        "purpose": "Évaluer probabilité et impact",
+        "template": "Analyse le risque suivant dans le contexte du projet : évalue sa probabilité, son impact (délai, coût, qualité, périmètre) et identifie les risques dérivés ou liés qu'il pourrait déclencher.",
+        "variables": ["project.name", "project.methodology"]
+      },
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
+        "checklist": [
+          { "id": "probability", "label": "La probabilité est évaluée avec un raisonnement explicite.", "required": true },
+          { "id": "impact", "label": "L'impact est évalué sur plusieurs dimensions (délai, coût, qualité...).", "required": true }
+        ]
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": true }
+    },
+    {
+      "id": "clarify-questions",
+      "order": 4,
+      "type": "ai_question",
+      "title": "Identifier les informations manquantes",
+      "objective": "Faire remonter les questions nécessaires pour affiner l'évaluation.",
+      "why": "Une évaluation de risque bâclée par manque d'information est pire qu'une évaluation incomplète mais honnête.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Identifier les informations manquantes",
+        "purpose": "Compléter le contexte avant de challenger l'évaluation",
+        "template": "Quelles informations te manquent pour évaluer ce risque avec confiance ? Pose-moi les questions correspondantes.",
+        "variables": []
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "challenge-evaluation",
+      "order": 5,
+      "type": "ai_challenge",
+      "title": "Challenger l'évaluation",
+      "objective": "Détecter les biais d'optimisme et les risques dérivés non identifiés.",
+      "why": "Les évaluations de risque souffrent souvent d'un biais d'optimisme du porteur du sujet.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Challenger l'évaluation du risque",
+        "purpose": "Détecter les angles morts",
+        "template": "Challenge cette évaluation : la probabilité est-elle sous-estimée ? Y a-t-il un biais d'optimisme ? Quels risques dérivés n'ont pas été mentionnés ? Que se passerait-il dans le pire scénario réaliste ?",
+        "variables": []
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "produce-mitigation-plan",
+      "order": 6,
+      "type": "ai_production",
+      "title": "Construire le plan de mitigation",
+      "objective": "Générer un plan d'action concret : prévention, mitigation, plan de contingence.",
+      "why": "Un plan de mitigation générique ('surveiller la situation') n'a aucune valeur opérationnelle.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Construire le plan de mitigation",
+        "purpose": "Produire des actions concrètes",
+        "template": "En te basant sur l'évaluation validée et challengée, propose un plan de traitement du risque avec : 1. Stratégie retenue (éviter/réduire/transférer/accepter), 2. Actions de prévention, 3. Actions de mitigation si le risque se matérialise, 4. Plan de contingence, 5. Indicateurs de surveillance (signaux d'alerte précoce), 6. Responsable proposé pour chaque action.",
+        "variables": ["preferences.detailLevel"]
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "finalize",
+      "order": 7,
+      "type": "checklist",
+      "title": "Finaliser et valider",
+      "objective": "Valider humainement l'évaluation et le plan avant intégration au registre des risques.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant d'intégrer ce risque au registre, vérifiez chacun des points suivants.",
+        "checklist": [
+          { "id": "evaluation-realistic", "label": "L'évaluation probabilité/impact est réaliste, pas optimiste.", "required": true },
+          { "id": "actions-concrete", "label": "Les actions de mitigation sont concrètes et assignables.", "required": true },
+          { "id": "owner-assigned", "label": "Un responsable est identifié pour le suivi du risque.", "required": true },
+          { "id": "no-hallucination", "label": "Aucune information n'a été inventée par l'IA.", "required": true }
+        ]
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": true }
+    }
+  ],
+  "finalChecklist": [
+    { "id": "evaluation-realistic", "label": "L'évaluation probabilité/impact est réaliste.", "required": true },
+    { "id": "actions-concrete", "label": "Les actions de mitigation sont concrètes.", "required": true },
+    { "id": "owner-assigned", "label": "Un responsable est identifié.", "required": true },
+    { "id": "no-hallucination", "label": "Aucune information n'a été inventée par l'IA.", "required": true }
+  ],
+  "completion": {
+    "message": "Le risque est évalué et son plan de traitement est prêt à être intégré au registre des risques.",
+    "nextWorkflowSuggestions": ["prepare-copil", "reporting-projet"]
+  }
+}

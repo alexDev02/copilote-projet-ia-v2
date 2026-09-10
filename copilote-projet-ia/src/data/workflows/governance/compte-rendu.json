@@ -1,0 +1,115 @@
+{
+  "id": "rediger-compte-rendu",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Rédiger un compte rendu",
+    "shortTitle": "Compte rendu",
+    "description": "Transformer des notes brutes de réunion en compte rendu clair, avec décisions et actions explicites.",
+    "category": "gouvernance",
+    "icon": "document",
+    "difficulty": "debutant",
+    "estimatedMinutes": 15,
+    "tags": ["compte rendu", "réunion", "gouvernance"]
+  },
+  "objective": {
+    "title": "Produire un compte rendu actionnable",
+    "description": "Un bon compte rendu se relit en 2 minutes et permet à quelqu'un d'absent de savoir exactement quoi faire."
+  },
+  "prerequisites": {
+    "contextRequired": false,
+    "documentsRecommended": ["Notes prises pendant la réunion", "Ordre du jour de la réunion"]
+  },
+  "steps": [
+    {
+      "id": "meeting-context",
+      "order": 1,
+      "type": "input",
+      "title": "Contexte de la réunion",
+      "objective": "Rappeler le cadre de la réunion pour situer le compte rendu.",
+      "inputs": [
+        { "id": "meeting-date", "label": "Date et objet de la réunion", "type": "text", "required": true, "placeholder": "COPIL Migration CRM - 10 septembre 2026" },
+        { "id": "meeting-participants", "label": "Participants présents", "type": "textarea", "required": true }
+      ],
+      "documents": [],
+      "navigation": { "allowBack": false, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les notes",
+      "objective": "Rassembler les notes brutes prises pendant la réunion.",
+      "instructions": { "action": "Collez ou joignez vos notes brutes, même désordonnées, directement dans votre conversation avec votre IA." },
+      "inputs": [],
+      "documents": [
+        { "label": "Notes de réunion", "required": true, "purpose": "Matière première du compte rendu." },
+        { "label": "Ordre du jour", "required": false, "purpose": "Vérifier que tous les points ont été couverts." }
+      ],
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "produce-minutes",
+      "order": 3,
+      "type": "ai_production",
+      "title": "Structurer le compte rendu",
+      "objective": "Transformer les notes brutes en compte rendu structuré.",
+      "why": "L'IA excelle à structurer des notes désordonnées en distinguant décisions, actions et points d'information.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Structurer le compte rendu",
+        "purpose": "Produire un document clair à partir de notes brutes",
+        "template": "À partir des notes brutes jointes à cette conversation, rédige le compte rendu de cette réunion avec la structure suivante : 1. Résumé en 3 lignes, 2. Points abordés, 3. Décisions prises, 4. Actions (avec responsable et échéance si mentionnés, sinon signale-le comme manquant), 5. Points en suspens à traiter ultérieurement.",
+        "variables": ["preferences.detailLevel"]
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "review-minutes",
+      "order": 4,
+      "type": "ai_review",
+      "title": "Auditer le compte rendu",
+      "objective": "Vérifier la complétude et la clarté avant diffusion.",
+      "why": "Un compte rendu incomplet ou ambigu génère plus de questions qu'il n'en résout.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Auditer le compte rendu",
+        "purpose": "Contrôle qualité avant diffusion",
+        "template": "Relis ce compte rendu comme un participant qui était absent : comprends-tu clairement quoi faire ? Des actions ont-elles un responsable et une échéance ? Des décisions sont-elles ambiguës ? Signale tout ce qui nécessite une clarification.",
+        "variables": []
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "finalize",
+      "order": 5,
+      "type": "checklist",
+      "title": "Finaliser et diffuser",
+      "objective": "Valider le compte rendu avant envoi aux participants.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de diffuser, vérifiez chacun des points suivants.",
+        "checklist": [
+          { "id": "decisions-clear", "label": "Les décisions sont formulées sans ambiguïté.", "required": true },
+          { "id": "actions-owner", "label": "Chaque action a un responsable et une échéance.", "required": true },
+          { "id": "no-hallucination", "label": "Aucune information n'a été inventée par l'IA.", "required": true }
+        ]
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": true }
+    }
+  ],
+  "finalChecklist": [
+    { "id": "decisions-clear", "label": "Les décisions sont formulées sans ambiguïté.", "required": true },
+    { "id": "actions-owner", "label": "Chaque action a un responsable et une échéance.", "required": true },
+    { "id": "no-hallucination", "label": "Aucune information n'a été inventée par l'IA.", "required": true }
+  ],
+  "completion": {
+    "message": "Votre compte rendu est prêt à être diffusé.",
+    "nextWorkflowSuggestions": ["preparer-reunion", "prepare-copil"]
+  }
+}

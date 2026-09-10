@@ -1,0 +1,116 @@
+{
+  "id": "preparer-reunion",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Préparer une réunion",
+    "shortTitle": "Réunion",
+    "description": "Structurer un ordre du jour efficace et orienté résultat pour une réunion projet.",
+    "category": "gouvernance",
+    "icon": "calendar",
+    "difficulty": "debutant",
+    "estimatedMinutes": 12,
+    "tags": ["réunion", "ordre du jour", "gouvernance"]
+  },
+  "objective": {
+    "title": "Préparer une réunion utile",
+    "description": "Construire un ordre du jour qui produit des décisions, pas seulement des échanges d'information."
+  },
+  "prerequisites": {
+    "contextRequired": false,
+    "documentsRecommended": ["Compte rendu de la réunion précédente", "Suivi des actions en cours"]
+  },
+  "steps": [
+    {
+      "id": "define-objective",
+      "order": 1,
+      "type": "input",
+      "title": "Définir l'objectif et les participants",
+      "objective": "Clarifier ce que cette réunion doit produire et qui doit y être.",
+      "why": "Une réunion sans objectif de décision clair devient une réunion de statut qui aurait pu être un message.",
+      "inputs": [
+        { "id": "meeting-goal", "label": "Objectif de la réunion", "type": "textarea", "required": true, "placeholder": "Ex : Trancher entre deux options techniques pour l'intégration." },
+        { "id": "meeting-participants", "label": "Participants", "type": "text", "required": true, "placeholder": "Rôles ou noms des participants clés." },
+        { "id": "meeting-duration", "label": "Durée prévue", "type": "text", "required": false, "placeholder": "30 min" }
+      ],
+      "documents": [],
+      "navigation": { "allowBack": false, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler le contexte nécessaire pour un ordre du jour pertinent.",
+      "instructions": { "action": "Ajoutez ces documents directement dans votre conversation avec votre IA." },
+      "inputs": [],
+      "documents": [
+        { "label": "Compte rendu précédent", "required": false, "purpose": "Assurer la continuité des sujets en cours." },
+        { "label": "Suivi des actions", "required": false, "purpose": "Vérifier les actions à relancer." }
+      ],
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "build-agenda",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Structurer l'ordre du jour",
+      "objective": "Générer un ordre du jour priorisé, avec un temps indicatif par point.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Structurer l'ordre du jour",
+        "purpose": "Produire un ordre du jour actionnable",
+        "template": "Construis un ordre du jour pour cette réunion : {{step.title}}. Priorise les points nécessitant une décision, indique un temps indicatif par point, et précise pour chaque point s'il s'agit d'une information, d'une discussion ou d'une décision attendue.",
+        "variables": ["step.title"]
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "review-agenda",
+      "order": 4,
+      "type": "ai_review",
+      "title": "Relire l'ordre du jour",
+      "objective": "Vérifier que le minutage est réaliste et que chaque point a une finalité claire.",
+      "why": "Un ordre du jour surchargé garantit une réunion qui déborde sans rien trancher.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Relire l'ordre du jour",
+        "purpose": "Contrôle qualité avant envoi",
+        "template": "Relis cet ordre du jour comme si tu devais y participer : le minutage est-il réaliste compte tenu de la durée totale ? Un point manque-t-il de finalité claire ? Propose des ajustements si nécessaire.",
+        "variables": []
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "finalize",
+      "order": 5,
+      "type": "checklist",
+      "title": "Finaliser et envoyer",
+      "objective": "Valider l'ordre du jour avant diffusion aux participants.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant d'envoyer la convocation, vérifiez chacun des points suivants.",
+        "checklist": [
+          { "id": "decision-points", "label": "Chaque point de décision est identifié comme tel.", "required": true },
+          { "id": "timing-realistic", "label": "Le minutage est réaliste par rapport à la durée totale.", "required": true },
+          { "id": "right-participants", "label": "Les bons participants sont conviés.", "required": true }
+        ]
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": true }
+    }
+  ],
+  "finalChecklist": [
+    { "id": "decision-points", "label": "Chaque point de décision est identifié.", "required": true },
+    { "id": "timing-realistic", "label": "Le minutage est réaliste.", "required": true },
+    { "id": "right-participants", "label": "Les bons participants sont conviés.", "required": true }
+  ],
+  "completion": {
+    "message": "Votre ordre du jour est prêt à être diffusé.",
+    "nextWorkflowSuggestions": ["rediger-compte-rendu"]
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "id": "reporting-projet",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Produire un reporting projet",
+    "shortTitle": "Reporting",
+    "description": "Analyser l'avancement du projet et produire un reporting clair, factuel et orienté décision.",
+    "category": "gouvernance",
+    "icon": "chart",
+    "difficulty": "intermediaire",
+    "estimatedMinutes": 20,
+    "tags": ["reporting", "gouvernance", "avancement", "indicateurs"]
+  },
+  "objective": {
+    "title": "Produire un reporting fiable et lisible",
+    "description": "Analyser l'avancement avant de rédiger, pour éviter un reporting qui enjolive ou dilue les points d'attention."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": [
+      "Planning à jour",
+      "Suivi budgétaire",
+      "Registre des risques",
+      "Suivi des actions",
+      "Dernier reporting"
+    ]
+  },
+  "steps": [
+    {
+      "id": "define-scope",
+      "order": 1,
+      "type": "input",
+      "title": "Définir le périmètre du reporting",
+      "objective": "Clarifier la période couverte, les destinataires et le niveau de détail attendu.",
+      "why": "Un reporting destiné à un COMEX n'a pas le même niveau de détail qu'un reporting d'équipe.",
+      "inputs": [
+        { "id": "reporting-period", "label": "Période couverte", "type": "text", "required": true, "placeholder": "Semaine du 8 au 12 septembre 2026" },
+        { "id": "reporting-audience", "label": "Destinataires", "type": "text", "required": true, "placeholder": "Sponsor, COMEX, équipe projet..." }
+      ],
+      "documents": [],
+      "navigation": { "allowBack": false, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler les données nécessaires à une analyse factuelle.",
+      "instructions": { "action": "Ajoutez ces documents directement dans votre conversation avec votre IA." },
+      "inputs": [],
+      "documents": [
+        { "label": "Planning à jour", "required": false, "purpose": "Objectiver l'avancement réel." },
+        { "label": "Suivi budgétaire", "required": false, "purpose": "Identifier les dérives." },
+        { "label": "Registre des risques", "required": false, "purpose": "Faire remonter les risques actifs." },
+        { "label": "Dernier reporting", "required": false, "purpose": "Assurer la continuité du suivi." }
+      ],
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "analyze-progress",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Analyser l'avancement",
+      "objective": "Obtenir une lecture factuelle de l'avancement, des écarts et des risques avant toute rédaction.",
+      "why": "Ne demandez pas encore la rédaction du reporting. L'IA sert ici d'auditeur neutre.",
+      "instructions": {
+        "before": "Joignez les documents disponibles à votre conversation IA.",
+        "action": "Demandez à l'IA d'analyser l'avancement, sans rédiger le reporting.",
+        "after": "Relisez l'analyse avant de poursuivre."
+      },
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Analyser l'avancement du projet",
+        "purpose": "Obtenir une analyse factuelle avant rédaction",
+        "template": "Sur la base des documents joints et du contexte projet ci-dessus, analyse l'avancement réel pour la période : {{step.title}}. Identifie les écarts par rapport au planning, les dérives budgétaires et les risques actifs à signaler. Ne rédige pas encore le reporting, produis uniquement l'analyse.",
+        "variables": ["project.name", "step.title"]
+      },
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
+        "checklist": [
+          { "id": "progress", "label": "L'avancement réel est objectivé.", "required": true },
+          { "id": "deviations", "label": "Les écarts sont chiffrés ou explicités.", "required": true }
+        ]
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": true }
+    },
+    {
+      "id": "challenge-reading",
+      "order": 4,
+      "type": "ai_challenge",
+      "title": "Challenger la lecture",
+      "objective": "Vérifier que l'analyse ne masque pas de signaux faibles ou d'indicateurs trompeurs.",
+      "why": "Un reporting trop optimiste retarde la détection des vrais problèmes.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Challenger l'analyse d'avancement",
+        "purpose": "Détecter les angles morts avant rédaction",
+        "template": "Challenge cette analyse : y a-t-il des indicateurs qui masquent un problème sous-jacent ? Des risques minimisés ? Des dépendances externes non mentionnées ? Sois direct.",
+        "variables": []
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "produce-reporting",
+      "order": 5,
+      "type": "ai_production",
+      "title": "Rédiger le reporting",
+      "objective": "Générer le reporting structuré à partir de l'analyse validée et challengée.",
+      "why": "La rédaction n'intervient qu'après analyse et challenge — jamais avant.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Rédiger le reporting",
+        "purpose": "Produire le document final",
+        "template": "En te basant sur l'analyse validée et challengée précédemment, rédige le reporting destiné à : {{step.title}}, avec la structure suivante : 1. Synthèse, 2. Avancement, 3. Indicateurs clés, 4. Risques, 5. Points d'attention, 6. Actions en cours, 7. Prochaines étapes. Adapte le niveau de détail au destinataire.",
+        "variables": ["preferences.detailLevel"],
+        "sections": [
+          { "type": "role", "title": "Rôle", "content": "Agis comme un chef de projet senior rédigeant pour un public exigeant et pressé." },
+          { "type": "rules", "title": "Règles", "items": ["Ne crée aucune information.", "Reste factuel.", "Signale les informations manquantes."] }
+        ]
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+    },
+    {
+      "id": "finalize",
+      "order": 6,
+      "type": "checklist",
+      "title": "Finaliser et valider",
+      "objective": "Valider humainement le reporting avant diffusion.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de diffuser, vérifiez chacun des points suivants.",
+        "checklist": [
+          { "id": "facts-verified", "label": "Les chiffres et faits ont été vérifiés.", "required": true },
+          { "id": "risks-visible", "label": "Les risques importants sont visibles, pas dilués.", "required": true },
+          { "id": "actions-owner", "label": "Les actions ont un responsable et une échéance.", "required": true },
+          { "id": "no-hallucination", "label": "Aucune information n'a été inventée par l'IA.", "required": true }
+        ]
+      },
+      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": true }
+    }
+  ],
+  "finalChecklist": [
+    { "id": "facts-verified", "label": "Les chiffres et faits ont été vérifiés.", "required": true },
+    { "id": "risks-visible", "label": "Les risques importants sont visibles.", "required": true },
+    { "id": "actions-owner", "label": "Les actions ont un responsable.", "required": true },
+    { "id": "no-hallucination", "label": "Aucune information n'a été inventée par l'IA.", "required": true }
+  ],
+  "completion": {
+    "message": "Votre reporting est prêt à être diffusé.",
+    "nextWorkflowSuggestions": ["prepare-copil", "analyser-risque"]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "module-02-donner-du-contexte",
+  "order": 2,
+  "title": "Donner du contexte",
+  "summary": "Pourquoi et comment fournir à l'IA le contexte nécessaire pour obtenir des réponses réellement utiles.",
+  "estimatedMinutes": 5,
+  "sections": [
+    {
+      "heading": "Pourquoi le contexte change tout",
+      "paragraphs": [
+        "Une même question posée sans contexte et avec contexte produit deux réponses radicalement différentes. Sans contexte, l'IA répond de façon générique. Avec contexte, elle adapte son raisonnement à votre situation réelle.",
+        "C'est pour cela que Copilote Projet IA vous fait configurer un contexte projet une seule fois : il est ensuite réinjecté automatiquement dans chaque instruction, sans que vous ayez à le retaper à chaque fois."
+      ]
+    },
+    {
+      "heading": "Les éléments de contexte qui comptent",
+      "paragraphs": [
+        "Cinq éléments suffisent généralement à transformer la qualité d'une réponse IA."
+      ],
+      "bullets": [
+        "Votre rôle : chef de projet, PMO, Scrum Master... l'angle attendu de la réponse en dépend.",
+        "Le projet : nom, description, secteur, complexité.",
+        "Les objectifs : ce que le projet doit atteindre, pas seulement ce qu'il fait.",
+        "Les contraintes : délais, budget, dépendances, contraintes organisationnelles.",
+        "Le contexte métier : le secteur d'activité et son vocabulaire propre."
+      ]
+    },
+    {
+      "heading": "Le prompt d'initialisation",
+      "paragraphs": [
+        "Une fois votre contexte configuré dans l'application, l'écran « Mon contexte IA » génère une instruction d'initialisation à copier en tout début de conversation avec votre outil IA. Cette conversation devient alors votre espace de travail dédié au projet : vous n'avez plus à répéter le contexte à chaque nouvelle demande."
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Le contexte transforme une réponse générique en réponse utile.",
+    "Rôle, projet, objectifs, contraintes et contexte métier suffisent dans la plupart des cas.",
+    "Le prompt d'initialisation évite de répéter ce contexte à chaque échange."
+  ]
+}

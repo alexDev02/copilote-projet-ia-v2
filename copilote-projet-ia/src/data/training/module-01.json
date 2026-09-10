@@ -1,0 +1,50 @@
+{
+  "id": "module-01-comprendre-ia",
+  "order": 1,
+  "title": "Comprendre l'IA",
+  "summary": "Ce que l'IA peut réellement apporter à un chef de projet, ses limites, et ce qui doit rester une décision humaine.",
+  "estimatedMinutes": 5,
+  "sections": [
+    {
+      "heading": "Ce que l'IA apporte au PM",
+      "paragraphs": [
+        "Une IA conversationnelle est excellente pour structurer, reformuler, analyser un volume important d'informations et challenger un raisonnement. Elle ne remplace pas votre jugement, elle l'accélère.",
+        "Concrètement, elle vous fait gagner du temps sur les tâches de mise en forme et de première analyse, pour que vous puissiez consacrer votre attention aux décisions elles-mêmes."
+      ],
+      "bullets": [
+        "Structurer un reporting, un compte rendu, un cahier des charges.",
+        "Analyser un volume de documents pour en extraire les points clés.",
+        "Challenger une analyse pour détecter des angles morts.",
+        "Proposer plusieurs formulations ou plusieurs angles sur un même sujet."
+      ]
+    },
+    {
+      "heading": "Ses limites",
+      "paragraphs": [
+        "Une IA n'a aucune connaissance directe de votre projet, de votre organisation ou de vos enjeux politiques internes. Elle ne sait que ce que vous lui donnez.",
+        "Elle peut produire des réponses fluides et convaincantes qui contiennent pourtant des erreurs factuelles ou des informations inventées (hallucinations). Le module 5 y revient en détail."
+      ],
+      "bullets": [
+        "Aucune mémoire fiable d'une conversation à l'autre, sauf si vous le lui rappelez.",
+        "Aucune connaissance implicite de votre contexte métier ou organisationnel.",
+        "Un ton assuré n'est pas une garantie d'exactitude."
+      ]
+    },
+    {
+      "heading": "Ce qui doit rester humain",
+      "paragraphs": [
+        "L'IA assiste, le PM décide. Les arbitrages, les décisions politiquement ou humainement sensibles, et la validation finale de tout document diffusé restent de votre responsabilité, quelle que soit la qualité du résultat produit."
+      ],
+      "bullets": [
+        "Les décisions d'arbitrage (budget, ressources, périmètre).",
+        "Les communications sensibles ou à fort enjeu relationnel.",
+        "La validation finale avant diffusion à des tiers."
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "L'IA accélère l'analyse et la production, elle ne remplace pas le jugement du PM.",
+    "Elle ne sait que ce que vous lui donnez comme contexte.",
+    "Toute décision d'arbitrage ou de diffusion reste une responsabilité humaine."
+  ]
+}

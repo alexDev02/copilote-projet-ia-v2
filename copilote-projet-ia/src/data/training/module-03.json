@@ -1,0 +1,40 @@
+{
+  "id": "module-03-travailler-avec-ia",
+  "order": 3,
+  "title": "Travailler avec l'IA",
+  "summary": "La boucle qui fait toute la différence : analyser, questionner, challenger et améliorer avant de produire.",
+  "estimatedMinutes": 6,
+  "sections": [
+    {
+      "heading": "Le piège du résultat immédiat",
+      "paragraphs": [
+        "Le réflexe le plus courant consiste à demander directement le résultat final à l'IA : « Rédige-moi mon COPIL », « Fais-moi le planning ». C'est aussi le moyen le plus sûr d'obtenir un résultat générique, mal calibré, ou basé sur des suppositions non vérifiées.",
+        "L'approche de Copilote Projet IA inverse ce réflexe : chaque workflow vous fait passer par une boucle avant toute production."
+      ]
+    },
+    {
+      "heading": "La boucle : analyser → questionner → challenger → produire → contrôler",
+      "paragraphs": [
+        "Chaque étape a un rôle précis, et sauter une étape dégrade la qualité de celle qui suit."
+      ],
+      "bullets": [
+        "Analyser : demandez d'abord une lecture factuelle de la situation, sans rédaction.",
+        "Questionner : demandez à l'IA quelles informations lui manquent pour bien faire son travail.",
+        "Challenger : demandez-lui explicitement de remettre en cause sa propre analyse.",
+        "Produire : ce n'est qu'à ce stade que vous demandez le document final.",
+        "Contrôler : demandez un dernier audit du résultat avant de le valider vous-même."
+      ]
+    },
+    {
+      "heading": "Demander plusieurs angles",
+      "paragraphs": [
+        "Sur un sujet à enjeu, il est souvent utile de demander deux ou trois angles différents plutôt qu'une seule proposition : cela révèle des options ou des risques que vous n'auriez pas envisagés spontanément."
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Ne demandez jamais le résultat final en premier.",
+    "La boucle analyser → questionner → challenger → produire → contrôler améliore nettement la qualité du résultat.",
+    "Demander plusieurs angles fait émerger des options que vous n'auriez pas vues seul."
+  ]
+}

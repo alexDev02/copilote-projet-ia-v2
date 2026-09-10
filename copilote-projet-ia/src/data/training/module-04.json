@@ -1,0 +1,38 @@
+{
+  "id": "module-04-travailler-avec-documents",
+  "order": 4,
+  "title": "Travailler avec ses documents",
+  "summary": "Comment tirer parti de vos documents de référence (PDF, Word, Excel) et ce qu'il faut savoir sur la confidentialité.",
+  "estimatedMinutes": 5,
+  "sections": [
+    {
+      "heading": "Joindre vos documents",
+      "paragraphs": [
+        "Les outils IA du marché (ChatGPT, Claude, Gemini, Copilot) permettent de joindre directement des fichiers PDF, Word ou Excel à une conversation. Copilote Projet IA ne stocke aucun document : il vous indique simplement, à chaque étape pertinente, quels documents joindre et pourquoi.",
+        "Joindre un document de référence (modèle de COPIL, gabarit de compte rendu, cahier des charges type) permet aussi à l'IA d'aligner sa production sur les standards de votre entreprise, en termes de structure, de terminologie et de niveau de détail."
+      ]
+    },
+    {
+      "heading": "Quand le Markdown est utile",
+      "paragraphs": [
+        "Le format Markdown (.md) est un format texte structuré, plus facile à interpréter précisément par une IA qu'un document richement mis en forme. Il est utile pour des contenus déjà structurés (procédures, gabarits), mais Copilote Projet IA ne vous demande jamais de convertir manuellement vos documents : ce n'est pertinent que dans certains cas particuliers, pas une étape systématique."
+      ]
+    },
+    {
+      "heading": "Confidentialité et anonymisation",
+      "paragraphs": [
+        "Avant de joindre un document à une conversation IA, vérifiez les règles de confidentialité de votre organisation. Selon le contexte, il peut être nécessaire d'anonymiser certaines informations : noms de personnes, données clients, montants contractuels précis, informations stratégiques non publiques."
+      ],
+      "bullets": [
+        "Vérifiez la politique de votre entreprise sur l'usage d'outils IA externes.",
+        "Anonymisez les données personnelles ou sensibles quand c'est possible.",
+        "En cas de doute sur la confidentialité d'un document, ne le joignez pas."
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Copilote Projet IA ne stocke aucun document : vous les joignez directement dans votre outil IA.",
+    "Un document de référence aide l'IA à respecter les standards de votre entreprise.",
+    "La confidentialité et l'anonymisation restent de votre responsabilité avant tout envoi."
+  ]
+}

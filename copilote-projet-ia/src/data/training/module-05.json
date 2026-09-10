@@ -1,0 +1,51 @@
+{
+  "id": "module-05-controler-les-resultats",
+  "order": 5,
+  "title": "Contrôler les résultats",
+  "summary": "Détecter les hallucinations, distinguer les faits des hypothèses, et pourquoi la validation humaine reste non négociable.",
+  "estimatedMinutes": 6,
+  "sections": [
+    {
+      "heading": "Qu'est-ce qu'une hallucination",
+      "paragraphs": [
+        "Une hallucination est une information produite par l'IA qui semble plausible et est formulée avec assurance, mais qui est fausse ou inventée. Ce n'est pas un bug rare : c'est une caractéristique structurelle des modèles de langage, qui peut survenir même sur des sujets simples.",
+        "Le risque principal n'est pas que l'IA se trompe, c'est qu'elle se trompe de façon convaincante, sans signaler son incertitude."
+      ]
+    },
+    {
+      "heading": "Distinguer faits, hypothèses et recommandations",
+      "paragraphs": [
+        "Un résultat IA de qualité doit permettre de distinguer clairement trois types de contenu.",
+        "C'est exactement ce que demandent les garde-fous intégrés à chaque instruction générée par Copilote Projet IA : « distingue les faits des hypothèses », « signale les informations manquantes »."
+      ],
+      "bullets": [
+        "Les faits : ce qui est directement issu des documents ou informations que vous avez fournis.",
+        "Les hypothèses : ce que l'IA suppose en l'absence d'information, qui doit être explicitement signalé comme tel.",
+        "Les recommandations : ce que l'IA propose, qui reste une proposition et non une décision."
+      ]
+    },
+    {
+      "heading": "Une checklist de vérification simple",
+      "paragraphs": [
+        "Avant de valider un résultat produit par l'IA, quelques vérifications rapides suffisent à couvrir l'essentiel."
+      ],
+      "bullets": [
+        "Les chiffres et dates cités correspondent-ils à vos documents sources ?",
+        "Les hypothèses sont-elles signalées comme telles, ou présentées comme des faits ?",
+        "Les incohérences internes au document ont-elles été relevées ?",
+        "Une information manquante a-t-elle été comblée par une supposition non signalée ?"
+      ]
+    },
+    {
+      "heading": "Pourquoi la validation humaine reste non négociable",
+      "paragraphs": [
+        "Quelle que soit la qualité apparente d'un résultat, c'est vous qui engagez votre nom et votre crédibilité en le diffusant. La checklist de fin de chaque workflow n'est pas une formalité : c'est le dernier filet de sécurité avant que le document ne sorte de votre contrôle."
+      ]
+    }
+  ],
+  "keyTakeaways": [
+    "Une réponse assurée n'est pas une garantie d'exactitude.",
+    "Exigez systématiquement la distinction entre faits, hypothèses et recommandations.",
+    "La validation humaine finale n'est jamais une étape facultative."
+  ]
+}

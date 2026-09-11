@@ -12,6 +12,9 @@ npm run typecheck
 echo "→ Formatage (Prettier)..."
 npm run format:write
 
+echo "→ Validation des données workflow..."
+npm run validate:workflows
+
 echo "→ Build de production..."
 npm run build
 

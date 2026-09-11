@@ -19,6 +19,7 @@ npm run typecheck  # tsc --noEmit
 npm run lint
 npm run format      # vérifie le formatage
 npm run format:write
+npm run validate:workflows  # vérifie la cohérence structurelle des 15 workflows
 npm run build       # build de production dans dist/
 ```
 
@@ -37,7 +38,13 @@ Le script `deploy-update.sh` enchaîne install, vérifications, build, commit et
 
 ## Police (Inter self-hostée)
 
-La CSS référence `/fonts/Inter-Variable.woff2`. Pour respecter la CSP stricte (pas de police chargée depuis un CDN externe), téléchargez la variable font Inter et placez-la dans `public/fonts/Inter-Variable.woff2`. Tant que le fichier est absent, l'app utilise la pile de polices système en repli — aucun crash, juste un rendu légèrement différent.
+La CSS référence `/fonts/Inter-Variable.woff2`. Pour l'installer (une seule fois) :
+
+```bash
+bash scripts/fetch-fonts.sh
+```
+
+Tant que le fichier n'est pas présent, l'app utilise la pile de polices système en repli — aucun crash, juste un rendu légèrement différent.
 
 ## Ajouter un nouveau workflow
 
@@ -47,7 +54,8 @@ La CSS référence `/fonts/Inter-Variable.woff2`. Pour respecter la CSP stricte 
 
 ## Prochains lots prévus
 
-- Lot 3 : Reporting, Analyser un risque, Préparer une réunion, Rédiger un compte rendu.
-- Lot 4 : Module Formation (5 modules complets).
-- Lot 5 : 10 workflows P1 complémentaires.
-- Lot 6 : accessibilité, responsive avancé, tests.
+Le MVP des 15 workflows, la formation, le déploiement et le Lot 6 (accessibilité, responsive, validation automatisée) sont réalisés. Reste, pour la mise en vente :
+
+- Relecture finale du contenu par un tiers (regard neuf sur les 15 workflows).
+- Éventuelle page de présentation/landing avant l'accueil applicatif.
+- Mise en place du paiement (99€ lancement / 149€ tarif normal).

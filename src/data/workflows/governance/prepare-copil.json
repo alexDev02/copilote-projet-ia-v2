@@ -298,6 +298,6 @@
   ],
   "completion": {
     "message": "Votre COPIL est prêt à être finalisé.",
-    "nextWorkflowSuggestions": ["prepare-arbitrage", "prepare-communication"]
+    "nextWorkflowSuggestions": ["preparer-arbitrage", "communication-projet"]
   }
 }

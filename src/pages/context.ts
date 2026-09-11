@@ -222,7 +222,7 @@ export function renderContextPage(root: Element, options: ContextPageOptions): v
   ]);
   form.addEventListener('submit', (event) => event.preventDefault());
 
-  const main = el('main', { class: 'page page--context' }, [
+  const main = el('main', { id: 'main-content', class: 'page page--context' }, [
     el('h1', {}, ['Mon contexte IA']),
     el('p', { class: 'page__intro' }, [
       'Configurez une seule fois votre rôle, votre projet et vos préférences. Ce contexte alimente automatiquement tous les workflows.',

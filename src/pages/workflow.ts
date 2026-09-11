@@ -67,7 +67,7 @@ export function renderWorkflowPage(root: Element, options: WorkflowPageOptions):
   if (!maybeWorkflow) {
     mount(
       root,
-      el('main', { class: 'page page--not-found' }, [
+      el('main', { id: 'main-content', class: 'page page--not-found' }, [
         el('h1', {}, ['Workflow introuvable']),
         el('p', {}, ['Ce workflow n’existe pas ou n’est pas encore disponible.']),
       ]),
@@ -218,7 +218,7 @@ export function renderWorkflowPage(root: Element, options: WorkflowPageOptions):
       checklistBlock,
     ].filter((node): node is HTMLElement => node !== null);
 
-    const main = el('main', { class: 'page page--workflow' }, [
+    const main = el('main', { id: 'main-content', class: 'page page--workflow' }, [
       el('h1', {}, [workflow.metadata.title]),
       renderStepper(workflow.steps.length, step.order),
       el('h2', { class: 'workflow-step-title' }, [step.title]),
@@ -244,7 +244,7 @@ export function renderWorkflowPage(root: Element, options: WorkflowPageOptions):
       onClick: options.onNavigateHome,
     });
 
-    return el('main', { class: 'page page--completion' }, [
+    return el('main', { id: 'main-content', class: 'page page--completion' }, [
       el('h1', {}, ['Workflow terminé 🎉']),
       el('p', {}, [workflow.completion.message]),
       el(

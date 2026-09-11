@@ -54,7 +54,9 @@ createRouter((route) => {
     case 'not-found':
       mount(
         root,
-        el('main', { class: 'page page--not-found' }, [el('h1', {}, ['Page introuvable'])]),
+        el('main', { id: 'main-content', class: 'page page--not-found' }, [
+          el('h1', {}, ['Page introuvable']),
+        ]),
       );
       break;
   }

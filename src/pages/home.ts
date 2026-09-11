@@ -66,6 +66,9 @@ export function renderHomePage(root: Element, options: HomePageOptions): void {
     emptyState,
   ]);
 
-  const main = el('main', { class: 'page page--home' }, [hero, catalogueSection]);
+  const main = el('main', { id: 'main-content', class: 'page page--home' }, [
+    hero,
+    catalogueSection,
+  ]);
   mount(root, el('div', {}, [header, main]));
 }

@@ -66,7 +66,7 @@ function renderModuleList(root: Element, options: TrainingPageOptions): void {
     }),
   );
 
-  const main = el('main', { class: 'page page--training' }, [
+  const main = el('main', { id: 'main-content', class: 'page page--training' }, [
     el('h1', {}, ['Formation']),
     el('p', { class: 'page__intro' }, [
       'Cinq modules courts pour apprendre les bonnes pratiques de travail avec l’IA. ' +
@@ -84,7 +84,7 @@ function renderModuleReader(root: Element, moduleId: string, options: TrainingPa
   if (!maybeModule) {
     mount(
       root,
-      el('main', { class: 'page page--not-found' }, [
+      el('main', { id: 'main-content', class: 'page page--not-found' }, [
         el('h1', {}, ['Module introuvable']),
         createButton({
           label: 'Retour à la formation',
@@ -147,7 +147,7 @@ function renderModuleReader(root: Element, moduleId: string, options: TrainingPa
       onClick: () => (window.location.hash = '#/training'),
     });
 
-    const main = el('main', { class: 'page page--training-reader' }, [
+    const main = el('main', { id: 'main-content', class: 'page page--training-reader' }, [
       backButton,
       el('h1', {}, [trainingModule.title]),
       el('p', { class: 'page__intro' }, [trainingModule.summary]),

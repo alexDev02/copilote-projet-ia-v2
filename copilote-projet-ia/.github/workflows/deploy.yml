@@ -38,6 +38,9 @@ jobs:
       - name: Check formatting
         run: npm run format
 
+      - name: Validate workflow data
+        run: npm run validate:workflows
+
       - name: Build
         run: npm run build
 

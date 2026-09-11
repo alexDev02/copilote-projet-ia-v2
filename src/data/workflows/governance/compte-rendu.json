@@ -28,11 +28,27 @@
       "title": "Contexte de la réunion",
       "objective": "Rappeler le cadre de la réunion pour situer le compte rendu.",
       "inputs": [
-        { "id": "meeting-date", "label": "Date et objet de la réunion", "type": "text", "required": true, "placeholder": "COPIL Migration CRM - 10 septembre 2026" },
-        { "id": "meeting-participants", "label": "Participants présents", "type": "textarea", "required": true }
+        {
+          "id": "meeting-date",
+          "label": "Date et objet de la réunion",
+          "type": "text",
+          "required": true,
+          "placeholder": "COPIL Migration CRM - 10 septembre 2026"
+        },
+        {
+          "id": "meeting-participants",
+          "label": "Participants présents",
+          "type": "textarea",
+          "required": true
+        }
       ],
       "documents": [],
-      "navigation": { "allowBack": false, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "prepare-documents",
@@ -40,13 +56,28 @@
       "type": "documents",
       "title": "Préparer les notes",
       "objective": "Rassembler les notes brutes prises pendant la réunion.",
-      "instructions": { "action": "Collez ou joignez vos notes brutes, même désordonnées, directement dans votre conversation avec votre IA." },
+      "instructions": {
+        "action": "Collez ou joignez vos notes brutes, même désordonnées, directement dans votre conversation avec votre IA."
+      },
       "inputs": [],
       "documents": [
-        { "label": "Notes de réunion", "required": true, "purpose": "Matière première du compte rendu." },
-        { "label": "Ordre du jour", "required": false, "purpose": "Vérifier que tous les points ont été couverts." }
+        {
+          "label": "Notes de réunion",
+          "required": true,
+          "purpose": "Matière première du compte rendu."
+        },
+        {
+          "label": "Ordre du jour",
+          "required": false,
+          "purpose": "Vérifier que tous les points ont été couverts."
+        }
       ],
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "produce-minutes",
@@ -63,7 +94,12 @@
         "template": "À partir des notes brutes jointes à cette conversation, rédige le compte rendu de cette réunion avec la structure suivante : 1. Résumé en 3 lignes, 2. Points abordés, 3. Décisions prises, 4. Actions (avec responsable et échéance si mentionnés, sinon signale-le comme manquant), 5. Points en suspens à traiter ultérieurement.",
         "variables": ["preferences.detailLevel"]
       },
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "review-minutes",
@@ -80,7 +116,12 @@
         "template": "Relis ce compte rendu comme un participant qui était absent : comprends-tu clairement quoi faire ? Des actions ont-elles un responsable et une échéance ? Des décisions sont-elles ambiguës ? Signale tout ce qui nécessite une clarification.",
         "variables": []
       },
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "finalize",
@@ -95,18 +136,47 @@
         "humanValidationRequired": true,
         "instruction": "Avant de diffuser, vérifiez chacun des points suivants.",
         "checklist": [
-          { "id": "decisions-clear", "label": "Les décisions sont formulées sans ambiguïté.", "required": true },
-          { "id": "actions-owner", "label": "Chaque action a un responsable et une échéance.", "required": true },
-          { "id": "no-hallucination", "label": "Aucune information n'a été inventée par l'IA.", "required": true }
+          {
+            "id": "decisions-clear",
+            "label": "Les décisions sont formulées sans ambiguïté.",
+            "required": true
+          },
+          {
+            "id": "actions-owner",
+            "label": "Chaque action a un responsable et une échéance.",
+            "required": true
+          },
+          {
+            "id": "no-hallucination",
+            "label": "Aucune information n'a été inventée par l'IA.",
+            "required": true
+          }
         ]
       },
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": true }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
     }
   ],
   "finalChecklist": [
-    { "id": "decisions-clear", "label": "Les décisions sont formulées sans ambiguïté.", "required": true },
-    { "id": "actions-owner", "label": "Chaque action a un responsable et une échéance.", "required": true },
-    { "id": "no-hallucination", "label": "Aucune information n'a été inventée par l'IA.", "required": true }
+    {
+      "id": "decisions-clear",
+      "label": "Les décisions sont formulées sans ambiguïté.",
+      "required": true
+    },
+    {
+      "id": "actions-owner",
+      "label": "Chaque action a un responsable et une échéance.",
+      "required": true
+    },
+    {
+      "id": "no-hallucination",
+      "label": "Aucune information n'a été inventée par l'IA.",
+      "required": true
+    }
   ],
   "completion": {
     "message": "Votre compte rendu est prêt à être diffusé.",

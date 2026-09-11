@@ -29,12 +29,35 @@
       "objective": "Clarifier ce que cette réunion doit produire et qui doit y être.",
       "why": "Une réunion sans objectif de décision clair devient une réunion de statut qui aurait pu être un message.",
       "inputs": [
-        { "id": "meeting-goal", "label": "Objectif de la réunion", "type": "textarea", "required": true, "placeholder": "Ex : Trancher entre deux options techniques pour l'intégration." },
-        { "id": "meeting-participants", "label": "Participants", "type": "text", "required": true, "placeholder": "Rôles ou noms des participants clés." },
-        { "id": "meeting-duration", "label": "Durée prévue", "type": "text", "required": false, "placeholder": "30 min" }
+        {
+          "id": "meeting-goal",
+          "label": "Objectif de la réunion",
+          "type": "textarea",
+          "required": true,
+          "placeholder": "Ex : Trancher entre deux options techniques pour l'intégration."
+        },
+        {
+          "id": "meeting-participants",
+          "label": "Participants",
+          "type": "text",
+          "required": true,
+          "placeholder": "Rôles ou noms des participants clés."
+        },
+        {
+          "id": "meeting-duration",
+          "label": "Durée prévue",
+          "type": "text",
+          "required": false,
+          "placeholder": "30 min"
+        }
       ],
       "documents": [],
-      "navigation": { "allowBack": false, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "prepare-documents",
@@ -42,13 +65,28 @@
       "type": "documents",
       "title": "Préparer les informations",
       "objective": "Rassembler le contexte nécessaire pour un ordre du jour pertinent.",
-      "instructions": { "action": "Ajoutez ces documents directement dans votre conversation avec votre IA." },
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
       "inputs": [],
       "documents": [
-        { "label": "Compte rendu précédent", "required": false, "purpose": "Assurer la continuité des sujets en cours." },
-        { "label": "Suivi des actions", "required": false, "purpose": "Vérifier les actions à relancer." }
+        {
+          "label": "Compte rendu précédent",
+          "required": false,
+          "purpose": "Assurer la continuité des sujets en cours."
+        },
+        {
+          "label": "Suivi des actions",
+          "required": false,
+          "purpose": "Vérifier les actions à relancer."
+        }
       ],
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "build-agenda",
@@ -64,7 +102,12 @@
         "template": "Construis un ordre du jour pour cette réunion : {{step.title}}. Priorise les points nécessitant une décision, indique un temps indicatif par point, et précise pour chaque point s'il s'agit d'une information, d'une discussion ou d'une décision attendue.",
         "variables": ["step.title"]
       },
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "review-agenda",
@@ -81,7 +124,12 @@
         "template": "Relis cet ordre du jour comme si tu devais y participer : le minutage est-il réaliste compte tenu de la durée totale ? Un point manque-t-il de finalité claire ? Propose des ajustements si nécessaire.",
         "variables": []
       },
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "finalize",
@@ -96,16 +144,37 @@
         "humanValidationRequired": true,
         "instruction": "Avant d'envoyer la convocation, vérifiez chacun des points suivants.",
         "checklist": [
-          { "id": "decision-points", "label": "Chaque point de décision est identifié comme tel.", "required": true },
-          { "id": "timing-realistic", "label": "Le minutage est réaliste par rapport à la durée totale.", "required": true },
-          { "id": "right-participants", "label": "Les bons participants sont conviés.", "required": true }
+          {
+            "id": "decision-points",
+            "label": "Chaque point de décision est identifié comme tel.",
+            "required": true
+          },
+          {
+            "id": "timing-realistic",
+            "label": "Le minutage est réaliste par rapport à la durée totale.",
+            "required": true
+          },
+          {
+            "id": "right-participants",
+            "label": "Les bons participants sont conviés.",
+            "required": true
+          }
         ]
       },
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": true }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
     }
   ],
   "finalChecklist": [
-    { "id": "decision-points", "label": "Chaque point de décision est identifié.", "required": true },
+    {
+      "id": "decision-points",
+      "label": "Chaque point de décision est identifié.",
+      "required": true
+    },
     { "id": "timing-realistic", "label": "Le minutage est réaliste.", "required": true },
     { "id": "right-participants", "label": "Les bons participants sont conviés.", "required": true }
   ],

@@ -18,7 +18,11 @@
   },
   "prerequisites": {
     "contextRequired": true,
-    "documentsRecommended": ["Registre des risques", "Planning", "Compte rendu de la dernière revue de risques"]
+    "documentsRecommended": [
+      "Registre des risques",
+      "Planning",
+      "Compte rendu de la dernière revue de risques"
+    ]
   },
   "steps": [
     {
@@ -29,11 +33,28 @@
       "objective": "Formuler précisément l'événement redouté et son contexte d'apparition.",
       "why": "Un risque mal formulé (trop vague ou déjà un problème avéré) est impossible à traiter correctement.",
       "inputs": [
-        { "id": "risk-description", "label": "Description du risque", "type": "textarea", "required": true, "placeholder": "Ex : Le prestataire externe pourrait ne pas livrer l'environnement de test avant la date prévue." },
-        { "id": "risk-context", "label": "Contexte d'apparition", "type": "textarea", "required": false, "placeholder": "Ce qui a déclenché ou fait suspecter ce risque." }
+        {
+          "id": "risk-description",
+          "label": "Description du risque",
+          "type": "textarea",
+          "required": true,
+          "placeholder": "Ex : Le prestataire externe pourrait ne pas livrer l'environnement de test avant la date prévue."
+        },
+        {
+          "id": "risk-context",
+          "label": "Contexte d'apparition",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Ce qui a déclenché ou fait suspecter ce risque."
+        }
       ],
       "documents": [],
-      "navigation": { "allowBack": false, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "prepare-documents",
@@ -41,13 +62,28 @@
       "type": "documents",
       "title": "Préparer les informations",
       "objective": "Rassembler les éléments permettant une évaluation objective.",
-      "instructions": { "action": "Ajoutez ces documents directement dans votre conversation avec votre IA." },
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
       "inputs": [],
       "documents": [
-        { "label": "Registre des risques", "required": false, "purpose": "Vérifier si le risque est déjà identifié ou lié à un autre." },
-        { "label": "Planning", "required": false, "purpose": "Évaluer l'impact potentiel sur les jalons." }
+        {
+          "label": "Registre des risques",
+          "required": false,
+          "purpose": "Vérifier si le risque est déjà identifié ou lié à un autre."
+        },
+        {
+          "label": "Planning",
+          "required": false,
+          "purpose": "Évaluer l'impact potentiel sur les jalons."
+        }
       ],
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "analyze-risk",
@@ -69,11 +105,24 @@
         "humanValidationRequired": true,
         "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
         "checklist": [
-          { "id": "probability", "label": "La probabilité est évaluée avec un raisonnement explicite.", "required": true },
-          { "id": "impact", "label": "L'impact est évalué sur plusieurs dimensions (délai, coût, qualité...).", "required": true }
+          {
+            "id": "probability",
+            "label": "La probabilité est évaluée avec un raisonnement explicite.",
+            "required": true
+          },
+          {
+            "id": "impact",
+            "label": "L'impact est évalué sur plusieurs dimensions (délai, coût, qualité...).",
+            "required": true
+          }
         ]
       },
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": true }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
     },
     {
       "id": "clarify-questions",
@@ -90,7 +139,12 @@
         "template": "Quelles informations te manquent pour évaluer ce risque avec confiance ? Pose-moi les questions correspondantes.",
         "variables": []
       },
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "challenge-evaluation",
@@ -107,7 +161,12 @@
         "template": "Challenge cette évaluation : la probabilité est-elle sous-estimée ? Y a-t-il un biais d'optimisme ? Quels risques dérivés n'ont pas été mentionnés ? Que se passerait-il dans le pire scénario réaliste ?",
         "variables": []
       },
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "produce-mitigation-plan",
@@ -124,7 +183,12 @@
         "template": "En te basant sur l'évaluation validée et challengée, propose un plan de traitement du risque avec : 1. Stratégie retenue (éviter/réduire/transférer/accepter), 2. Actions de prévention, 3. Actions de mitigation si le risque se matérialise, 4. Plan de contingence, 5. Indicateurs de surveillance (signaux d'alerte précoce), 6. Responsable proposé pour chaque action.",
         "variables": ["preferences.detailLevel"]
       },
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": false }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
     },
     {
       "id": "finalize",
@@ -139,20 +203,53 @@
         "humanValidationRequired": true,
         "instruction": "Avant d'intégrer ce risque au registre, vérifiez chacun des points suivants.",
         "checklist": [
-          { "id": "evaluation-realistic", "label": "L'évaluation probabilité/impact est réaliste, pas optimiste.", "required": true },
-          { "id": "actions-concrete", "label": "Les actions de mitigation sont concrètes et assignables.", "required": true },
-          { "id": "owner-assigned", "label": "Un responsable est identifié pour le suivi du risque.", "required": true },
-          { "id": "no-hallucination", "label": "Aucune information n'a été inventée par l'IA.", "required": true }
+          {
+            "id": "evaluation-realistic",
+            "label": "L'évaluation probabilité/impact est réaliste, pas optimiste.",
+            "required": true
+          },
+          {
+            "id": "actions-concrete",
+            "label": "Les actions de mitigation sont concrètes et assignables.",
+            "required": true
+          },
+          {
+            "id": "owner-assigned",
+            "label": "Un responsable est identifié pour le suivi du risque.",
+            "required": true
+          },
+          {
+            "id": "no-hallucination",
+            "label": "Aucune information n'a été inventée par l'IA.",
+            "required": true
+          }
         ]
       },
-      "navigation": { "allowBack": true, "allowExit": true, "saveProgress": true, "requireValidation": true }
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
     }
   ],
   "finalChecklist": [
-    { "id": "evaluation-realistic", "label": "L'évaluation probabilité/impact est réaliste.", "required": true },
-    { "id": "actions-concrete", "label": "Les actions de mitigation sont concrètes.", "required": true },
+    {
+      "id": "evaluation-realistic",
+      "label": "L'évaluation probabilité/impact est réaliste.",
+      "required": true
+    },
+    {
+      "id": "actions-concrete",
+      "label": "Les actions de mitigation sont concrètes.",
+      "required": true
+    },
     { "id": "owner-assigned", "label": "Un responsable est identifié.", "required": true },
-    { "id": "no-hallucination", "label": "Aucune information n'a été inventée par l'IA.", "required": true }
+    {
+      "id": "no-hallucination",
+      "label": "Aucune information n'a été inventée par l'IA.",
+      "required": true
+    }
   ],
   "completion": {
     "message": "Le risque est évalué et son plan de traitement est prêt à être intégré au registre des risques.",

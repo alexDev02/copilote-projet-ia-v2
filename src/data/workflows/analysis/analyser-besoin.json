@@ -1,0 +1,243 @@
+{
+  "id": "analyser-besoin",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Analyser un besoin",
+    "shortTitle": "Analyse de besoin",
+    "description": "Transformer une demande formulée en besoin métier structuré, avec user stories et critères d'acceptation.",
+    "category": "analyse",
+    "icon": "search",
+    "difficulty": "intermediaire",
+    "estimatedMinutes": 25,
+    "tags": ["besoin", "user story", "critères d'acceptation", "analyse fonctionnelle"]
+  },
+  "objective": {
+    "title": "Transformer une demande en besoin exploitable",
+    "description": "Passer d'une demande souvent formulée comme une solution à un besoin formalisé et testable."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": [
+      "Demande initiale (ticket, email, notes de réunion)",
+      "Backlog existant"
+    ]
+  },
+  "steps": [
+    {
+      "id": "capture-request",
+      "order": 1,
+      "type": "input",
+      "title": "Capturer la demande",
+      "objective": "Noter la demande telle qu'elle a été formulée, avec son origine.",
+      "inputs": [
+        {
+          "id": "request-text",
+          "label": "Demande formulée",
+          "type": "textarea",
+          "required": true,
+          "placeholder": "Ex : Les utilisateurs veulent pouvoir exporter leurs données en Excel."
+        },
+        {
+          "id": "request-origin",
+          "label": "Origine de la demande",
+          "type": "text",
+          "required": false,
+          "placeholder": "Utilisateur final, sponsor, support client..."
+        }
+      ],
+      "documents": [],
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler le contexte utile à l'analyse.",
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
+      "inputs": [],
+      "documents": [
+        {
+          "label": "Backlog existant",
+          "required": false,
+          "purpose": "Vérifier qu'un besoin similaire n'existe pas déjà."
+        },
+        {
+          "label": "Demande initiale complète",
+          "required": false,
+          "purpose": "Ne perdre aucun détail du contexte d'origine."
+        }
+      ],
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "analyze-need",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Analyser le besoin sous-jacent",
+      "objective": "Identifier le problème utilisateur réel derrière la demande.",
+      "why": "Une demande formulée comme une fonctionnalité cache presque toujours un problème utilisateur plus général.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Analyser le besoin",
+        "purpose": "Identifier le problème utilisateur réel",
+        "template": "Analyse cette demande : quel problème utilisateur cherche-t-elle à résoudre ? Qui est concerné ? Dans quel contexte d'usage ? Reformule le besoin indépendamment de la solution proposée initialement.",
+        "variables": ["project.name"]
+      },
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
+        "checklist": [
+          {
+            "id": "user-problem",
+            "label": "Le problème utilisateur réel est identifié.",
+            "required": true
+          },
+          {
+            "id": "user-identified",
+            "label": "Le ou les utilisateurs concernés sont identifiés.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    },
+    {
+      "id": "clarify-questions",
+      "order": 4,
+      "type": "ai_question",
+      "title": "Identifier les informations manquantes",
+      "objective": "Faire remonter les questions à poser au demandeur avant de formaliser.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Identifier les informations manquantes",
+        "purpose": "Compléter le contexte avant formalisation",
+        "template": "Quelles questions faudrait-il poser au demandeur pour lever les ambiguïtés et écrire des critères d'acceptation précis ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "challenge-need",
+      "order": 5,
+      "type": "ai_challenge",
+      "title": "Challenger le besoin",
+      "objective": "Vérifier que le besoin n'est pas déjà couvert, ou qu'il ne cache pas un cas particulier trop spécifique.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Challenger le besoin",
+        "purpose": "Détecter les angles morts",
+        "template": "Challenge ce besoin : existe-t-il une solution de contournement déjà disponible ? Le besoin est-il généralisable ou s'agit-il d'un cas très spécifique à un seul utilisateur ? Quels cas limites (edge cases) faut-il anticiper ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "produce-user-stories",
+      "order": 6,
+      "type": "ai_production",
+      "title": "Formaliser en user stories",
+      "objective": "Générer les user stories et critères d'acceptation associés.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Formaliser le besoin",
+        "purpose": "Produire des user stories exploitables",
+        "template": "Formalise ce besoin sous forme d'une ou plusieurs user stories au format 'En tant que... je veux... afin de...', avec pour chacune une liste de critères d'acceptation vérifiables et les cas limites identifiés.",
+        "variables": ["project.methodology"]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "finalize",
+      "order": 7,
+      "type": "checklist",
+      "title": "Finaliser et valider",
+      "objective": "Valider humainement avant intégration au backlog.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant d'ajouter au backlog, vérifiez chacun des points suivants.",
+        "checklist": [
+          {
+            "id": "stories-clear",
+            "label": "Les user stories sont claires et centrées utilisateur.",
+            "required": true
+          },
+          {
+            "id": "criteria-testable",
+            "label": "Les critères d'acceptation sont vérifiables.",
+            "required": true
+          },
+          {
+            "id": "edge-cases",
+            "label": "Les cas limites principaux sont couverts.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    }
+  ],
+  "finalChecklist": [
+    {
+      "id": "stories-clear",
+      "label": "Les user stories sont claires et centrées utilisateur.",
+      "required": true
+    },
+    {
+      "id": "criteria-testable",
+      "label": "Les critères d'acceptation sont vérifiables.",
+      "required": true
+    },
+    { "id": "edge-cases", "label": "Les cas limites principaux sont couverts.", "required": true }
+  ],
+  "completion": {
+    "message": "Le besoin est formalisé et prêt à être intégré au backlog.",
+    "nextWorkflowSuggestions": ["cahier-des-charges", "strategie-de-tests"]
+  }
+}

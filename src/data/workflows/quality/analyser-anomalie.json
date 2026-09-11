@@ -1,0 +1,224 @@
+{
+  "id": "analyser-anomalie",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Analyser une anomalie",
+    "shortTitle": "Anomalie",
+    "description": "Diagnostiquer une anomalie en distinguant symptôme et cause racine, avant de proposer un plan de correction.",
+    "category": "qualite",
+    "icon": "bug",
+    "difficulty": "intermediaire",
+    "estimatedMinutes": 20,
+    "tags": ["anomalie", "bug", "cause racine", "qualité"]
+  },
+  "objective": {
+    "title": "Corriger la cause, pas le symptôme",
+    "description": "Éviter le correctif rapide qui traite le symptôme visible sans résoudre la cause racine."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": [
+      "Description de l'anomalie (ticket)",
+      "Logs ou captures d'écran",
+      "Environnement concerné"
+    ]
+  },
+  "steps": [
+    {
+      "id": "describe-anomaly",
+      "order": 1,
+      "type": "input",
+      "title": "Décrire l'anomalie",
+      "objective": "Formuler le symptôme observé et les conditions de reproduction.",
+      "inputs": [
+        {
+          "id": "anomaly-description",
+          "label": "Symptôme observé",
+          "type": "textarea",
+          "required": true,
+          "placeholder": "Ce qui se produit, différent du comportement attendu."
+        },
+        {
+          "id": "reproduction-steps",
+          "label": "Conditions de reproduction",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Étapes pour reproduire, environnement, fréquence."
+        }
+      ],
+      "documents": [],
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler les éléments techniques disponibles.",
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
+      "inputs": [],
+      "documents": [
+        {
+          "label": "Logs ou traces d'erreur",
+          "required": false,
+          "purpose": "Matière première du diagnostic."
+        },
+        {
+          "label": "Ticket ou ticket similaire déjà résolu",
+          "required": false,
+          "purpose": "Identifier un pattern déjà rencontré."
+        }
+      ],
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "analyze-root-cause",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Analyser la cause racine",
+      "objective": "Distinguer le symptôme observé de sa cause probable.",
+      "why": "Un correctif appliqué sur le symptôme sans identifier la cause racine revient généralement, souvent sous une forme différente.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Analyser la cause racine",
+        "purpose": "Diagnostiquer avant de corriger",
+        "template": "À partir de la description et des logs fournis, propose une ou plusieurs hypothèses de cause racine, classées par plausibilité. Distingue explicitement le symptôme observé de la cause suspectée.",
+        "variables": ["project.name"]
+      },
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
+        "checklist": [
+          {
+            "id": "symptom-vs-cause",
+            "label": "Le symptôme est distingué de la cause suspectée.",
+            "required": true
+          },
+          {
+            "id": "hypotheses-ranked",
+            "label": "Les hypothèses sont classées par plausibilité.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    },
+    {
+      "id": "challenge-diagnosis",
+      "order": 4,
+      "type": "ai_challenge",
+      "title": "Challenger le diagnostic",
+      "objective": "Vérifier que l'hypothèse retenue explique bien tous les symptômes observés.",
+      "why": "Une hypothèse séduisante qui n'explique qu'une partie des symptômes mène à un correctif incomplet.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Challenger le diagnostic",
+        "purpose": "Vérifier la cohérence de l'hypothèse retenue",
+        "template": "Challenge l'hypothèse retenue : explique-t-elle vraiment tous les symptômes observés ? Y a-t-il un scénario alternatif qui expliquerait mieux les faits ? Quel test permettrait de confirmer ou infirmer cette hypothèse ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "produce-action-plan",
+      "order": 5,
+      "type": "ai_production",
+      "title": "Proposer un plan de correction",
+      "objective": "Générer un plan d'action distinguant correctif immédiat et correction de fond.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Proposer un plan de correction",
+        "purpose": "Produire des actions concrètes",
+        "template": "Propose un plan de traitement de cette anomalie avec : 1. Correctif immédiat si nécessaire (contournement), 2. Correction de fond de la cause racine, 3. Tests de non-régression à prévoir, 4. Risque de récurrence si seul le correctif immédiat est appliqué.",
+        "variables": ["preferences.detailLevel"]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "finalize",
+      "order": 6,
+      "type": "checklist",
+      "title": "Finaliser et valider",
+      "objective": "Valider humainement le diagnostic et le plan avant mise en œuvre.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de lancer la correction, vérifiez chacun des points suivants.",
+        "checklist": [
+          {
+            "id": "root-cause-confirmed",
+            "label": "La cause racine est confirmée, pas seulement supposée.",
+            "required": true
+          },
+          {
+            "id": "regression-tests",
+            "label": "Des tests de non-régression sont prévus.",
+            "required": true
+          },
+          {
+            "id": "no-hallucination",
+            "label": "Aucune information technique n'a été inventée par l'IA.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    }
+  ],
+  "finalChecklist": [
+    { "id": "root-cause-confirmed", "label": "La cause racine est confirmée.", "required": true },
+    {
+      "id": "regression-tests",
+      "label": "Des tests de non-régression sont prévus.",
+      "required": true
+    },
+    {
+      "id": "no-hallucination",
+      "label": "Aucune information n'a été inventée par l'IA.",
+      "required": true
+    }
+  ],
+  "completion": {
+    "message": "Le diagnostic et le plan de correction sont prêts à être mis en œuvre.",
+    "nextWorkflowSuggestions": ["strategie-de-tests"]
+  }
+}

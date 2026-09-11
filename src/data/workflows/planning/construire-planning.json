@@ -1,0 +1,220 @@
+{
+  "id": "construire-planning",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Construire un planning",
+    "shortTitle": "Planning",
+    "description": "Structurer un planning réaliste à partir des activités, dépendances et contraintes de ressources.",
+    "category": "planification",
+    "icon": "calendar",
+    "difficulty": "intermediaire",
+    "estimatedMinutes": 25,
+    "tags": ["planning", "wbs", "jalons", "dépendances"]
+  },
+  "objective": {
+    "title": "Construire un planning crédible",
+    "description": "Éviter le planning optimiste construit sans challenge des dépendances et de la disponibilité réelle des ressources."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": [
+      "WBS ou liste des activités",
+      "Disponibilité des ressources",
+      "Jalons contractuels"
+    ]
+  },
+  "steps": [
+    {
+      "id": "define-inputs",
+      "order": 1,
+      "type": "input",
+      "title": "Définir le périmètre à planifier",
+      "objective": "Clarifier ce qui doit être planifié et les jalons imposés.",
+      "inputs": [
+        {
+          "id": "planning-scope",
+          "label": "Périmètre à planifier",
+          "type": "textarea",
+          "required": true,
+          "placeholder": "Lot fonctionnel, phase du projet, chantier..."
+        },
+        {
+          "id": "fixed-milestones",
+          "label": "Jalons imposés",
+          "type": "text",
+          "required": false,
+          "placeholder": "Date de mise en production contractuelle, événement externe..."
+        }
+      ],
+      "documents": [],
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler les activités et contraintes de ressources.",
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
+      "inputs": [],
+      "documents": [
+        {
+          "label": "WBS ou liste des activités",
+          "required": false,
+          "purpose": "Base de découpage du travail."
+        },
+        {
+          "label": "Disponibilité des ressources",
+          "required": false,
+          "purpose": "Éviter un planning théorique déconnecté des disponibilités réelles."
+        }
+      ],
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "analyze-dependencies",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Analyser dépendances et charges",
+      "objective": "Identifier les dépendances entre activités et les charges associées avant de séquencer.",
+      "why": "Séquencer avant d'avoir identifié les dépendances produit un planning qui casse au premier imprévu.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Analyser dépendances et charges",
+        "purpose": "Préparer un séquencement réaliste",
+        "template": "À partir des activités listées, identifie les dépendances entre elles (ce qui doit précéder quoi), les charges estimées, et les activités qui pourraient être menées en parallèle.",
+        "variables": ["project.name", "project.methodology"]
+      },
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
+        "checklist": [
+          {
+            "id": "dependencies-listed",
+            "label": "Les dépendances entre activités sont listées.",
+            "required": true
+          },
+          {
+            "id": "parallel-identified",
+            "label": "Les activités parallélisables sont identifiées.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    },
+    {
+      "id": "challenge-planning",
+      "order": 4,
+      "type": "ai_challenge",
+      "title": "Challenger les hypothèses de planning",
+      "objective": "Détecter l'optimisme excessif et les risques de contention de ressources.",
+      "why": "Le biais d'optimisme est la première cause de dérive de planning.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Challenger le planning",
+        "purpose": "Détecter les hypothèses fragiles",
+        "template": "Challenge ce séquencement : quelles hypothèses sont optimistes ? Où y a-t-il un risque de contention si une même ressource est sollicitée sur plusieurs activités en parallèle ? Quelles marges de sécurité manquent sur le chemin critique ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "produce-planning",
+      "order": 5,
+      "type": "ai_production",
+      "title": "Produire le planning",
+      "objective": "Générer le planning structuré avec jalons et chemin critique.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Produire le planning",
+        "purpose": "Produire le document final",
+        "template": "Construis le planning avec : 1. Séquencement des activités et dépendances, 2. Jalons clés, 3. Chemin critique identifié, 4. Marges de sécurité proposées, 5. Risques de planning identifiés. Respecte les jalons imposés indiqués en début de workflow.",
+        "variables": ["preferences.detailLevel"]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "finalize",
+      "order": 6,
+      "type": "checklist",
+      "title": "Finaliser et valider",
+      "objective": "Valider humainement le planning avant diffusion.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de diffuser, vérifiez chacun des points suivants.",
+        "checklist": [
+          { "id": "critical-path", "label": "Le chemin critique est identifié.", "required": true },
+          {
+            "id": "resource-conflicts",
+            "label": "Les conflits de ressources potentiels sont signalés.",
+            "required": true
+          },
+          {
+            "id": "milestones-respected",
+            "label": "Les jalons imposés sont respectés.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    }
+  ],
+  "finalChecklist": [
+    { "id": "critical-path", "label": "Le chemin critique est identifié.", "required": true },
+    {
+      "id": "resource-conflicts",
+      "label": "Les conflits de ressources sont signalés.",
+      "required": true
+    },
+    {
+      "id": "milestones-respected",
+      "label": "Les jalons imposés sont respectés.",
+      "required": true
+    }
+  ],
+  "completion": {
+    "message": "Le planning est prêt à être diffusé.",
+    "nextWorkflowSuggestions": ["prepare-copil", "analyser-risque"]
+  }
+}

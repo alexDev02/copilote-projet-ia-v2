@@ -1,0 +1,161 @@
+{
+  "id": "plan-action",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Construire un plan d'action",
+    "shortTitle": "Plan d'action",
+    "description": "Transformer une liste d'actions vagues en plan assignable, avec responsables et échéances réalistes.",
+    "category": "risques",
+    "icon": "list",
+    "difficulty": "debutant",
+    "estimatedMinutes": 15,
+    "tags": ["plan d'action", "suivi", "actions"]
+  },
+  "objective": {
+    "title": "Produire un plan d'action réellement suivi",
+    "description": "Un plan d'action sans responsable ni échéance précise n'est qu'une liste de bonnes intentions."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": ["Liste des actions à mener", "Suivi des actions précédentes"]
+  },
+  "steps": [
+    {
+      "id": "list-actions",
+      "order": 1,
+      "type": "input",
+      "title": "Lister les actions envisagées",
+      "objective": "Recenser les actions à mener, même formulées de façon encore imprécise.",
+      "inputs": [
+        {
+          "id": "raw-actions",
+          "label": "Actions envisagées",
+          "type": "textarea",
+          "required": true,
+          "placeholder": "Liste brute, même incomplète ou mal formulée."
+        }
+      ],
+      "documents": [],
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler le contexte utile pour prioriser et assigner les actions.",
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
+      "inputs": [],
+      "documents": [
+        {
+          "label": "Suivi des actions précédentes",
+          "required": false,
+          "purpose": "Vérifier qu'aucune action n'est dupliquée ou déjà en cours."
+        }
+      ],
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "produce-plan",
+      "order": 3,
+      "type": "ai_production",
+      "title": "Structurer le plan d'action",
+      "objective": "Reformuler chaque action pour la rendre assignable et vérifiable.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Structurer le plan d'action",
+        "purpose": "Produire un plan actionnable",
+        "template": "Reformule chaque action de la liste fournie pour qu'elle soit assignable et vérifiable : verbe d'action précis, résultat attendu mesurable, responsable proposé, échéance proposée. Priorise les actions selon leur urgence et leur impact.",
+        "variables": ["preferences.detailLevel"]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "review-plan",
+      "order": 4,
+      "type": "ai_review",
+      "title": "Vérifier le réalisme du plan",
+      "objective": "Détecter les échéances irréalistes ou les actions trop vagues pour être suivies.",
+      "why": "Un plan d'action trop chargé ou aux échéances irréalistes ne sera simplement pas suivi.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Vérifier le réalisme du plan",
+        "purpose": "Contrôle qualité avant diffusion",
+        "template": "Relis ce plan d'action d'un œil critique : une action reste-t-elle trop vague pour être vérifiable ? Une échéance semble-t-elle irréaliste compte tenu de la charge ? Le nombre d'actions est-il gérable pour les responsables assignés ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "finalize",
+      "order": 5,
+      "type": "checklist",
+      "title": "Finaliser et diffuser",
+      "objective": "Valider le plan avant diffusion aux responsables.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de diffuser, vérifiez chacun des points suivants.",
+        "checklist": [
+          {
+            "id": "owner-assigned",
+            "label": "Chaque action a un responsable identifié.",
+            "required": true
+          },
+          {
+            "id": "deadline-realistic",
+            "label": "Chaque échéance est réaliste.",
+            "required": true
+          },
+          {
+            "id": "measurable",
+            "label": "Chaque action est vérifiable (on peut dire si elle est faite ou non).",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    }
+  ],
+  "finalChecklist": [
+    { "id": "owner-assigned", "label": "Chaque action a un responsable.", "required": true },
+    { "id": "deadline-realistic", "label": "Chaque échéance est réaliste.", "required": true },
+    { "id": "measurable", "label": "Chaque action est vérifiable.", "required": true }
+  ],
+  "completion": {
+    "message": "Le plan d'action est prêt à être diffusé et suivi.",
+    "nextWorkflowSuggestions": ["prepare-copil", "reporting-projet"]
+  }
+}

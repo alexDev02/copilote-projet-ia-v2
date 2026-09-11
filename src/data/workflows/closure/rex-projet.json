@@ -1,0 +1,202 @@
+{
+  "id": "rex-projet",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Réaliser un REX projet",
+    "shortTitle": "REX",
+    "description": "Capitaliser sur les enseignements du projet, au-delà des banalités habituelles de fin de projet.",
+    "category": "cloture",
+    "icon": "flag",
+    "difficulty": "intermediaire",
+    "estimatedMinutes": 20,
+    "tags": ["rex", "retour d'expérience", "clôture", "capitalisation"]
+  },
+  "objective": {
+    "title": "Produire un REX qui sert vraiment au projet suivant",
+    "description": "Éviter le REX générique ('mieux communiquer', 'mieux anticiper') qui ne change rien à la pratique future."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": [
+      "Historique des risques et incidents majeurs",
+      "Reportings successifs",
+      "Retours de l'équipe"
+    ]
+  },
+  "steps": [
+    {
+      "id": "gather-facts",
+      "order": 1,
+      "type": "input",
+      "title": "Rassembler les faits marquants",
+      "objective": "Lister les événements marquants du projet, positifs et négatifs, avant toute analyse.",
+      "inputs": [
+        {
+          "id": "key-events",
+          "label": "Événements marquants du projet",
+          "type": "textarea",
+          "required": true,
+          "placeholder": "Succès, difficultés, moments critiques, décisions importantes."
+        }
+      ],
+      "documents": [],
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler l'historique factuel du projet.",
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
+      "inputs": [],
+      "documents": [
+        {
+          "label": "Historique des risques et incidents majeurs",
+          "required": false,
+          "purpose": "Objectiver les difficultés rencontrées."
+        },
+        {
+          "label": "Reportings successifs",
+          "required": false,
+          "purpose": "Reconstituer la trajectoire réelle du projet."
+        }
+      ],
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "analyze-causes",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Analyser les causes profondes",
+      "objective": "Identifier les causes structurelles derrière chaque événement marquant, pas seulement les symptômes.",
+      "why": "Un REX qui ne va pas jusqu'aux causes structurelles produit des enseignements trop vagues pour être actionnables.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Analyser les causes profondes",
+        "purpose": "Aller au-delà du symptôme",
+        "template": "Pour chacun des événements marquants listés, identifie la cause structurelle sous-jacente (organisation, processus, communication, compétences, outillage), pas seulement la description de ce qui s'est passé.",
+        "variables": ["project.name"]
+      },
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
+        "checklist": [
+          {
+            "id": "root-causes",
+            "label": "Les causes structurelles sont identifiées, pas seulement les symptômes.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    },
+    {
+      "id": "challenge-lessons",
+      "order": 4,
+      "type": "ai_challenge",
+      "title": "Challenger les enseignements",
+      "objective": "Éliminer les enseignements trop génériques pour être actionnables.",
+      "why": "'Mieux communiquer' n'est pas un enseignement actionnable. 'Mettre en place un point hebdomadaire de 15 minutes avec le fournisseur X' l'est.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Challenger les enseignements",
+        "purpose": "Éliminer les banalités",
+        "template": "Challenge ces enseignements : lesquels sont trop génériques pour changer réellement la pratique du prochain projet ? Reformule-les en actions concrètes et spécifiques.",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "produce-rex",
+      "order": 5,
+      "type": "ai_production",
+      "title": "Rédiger le REX",
+      "objective": "Générer le document de REX structuré et actionnable.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Rédiger le REX",
+        "purpose": "Produire le document final",
+        "template": "Rédige le REX du projet avec : 1. Synthèse du projet, 2. Ce qui a bien fonctionné et pourquoi, 3. Ce qui a posé difficulté et sa cause structurelle, 4. Enseignements actionnables pour les projets futurs, 5. Recommandation d'une action concrète à mettre en place dès le prochain projet.",
+        "variables": ["preferences.detailLevel"]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "finalize",
+      "order": 6,
+      "type": "checklist",
+      "title": "Finaliser et partager",
+      "objective": "Valider le REX avant de le partager avec l'organisation.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de partager, vérifiez chacun des points suivants.",
+        "checklist": [
+          {
+            "id": "actionable",
+            "label": "Les enseignements sont concrets et actionnables, pas génériques.",
+            "required": true
+          },
+          {
+            "id": "balanced",
+            "label": "Le REX couvre autant les succès que les difficultés.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    }
+  ],
+  "finalChecklist": [
+    {
+      "id": "actionable",
+      "label": "Les enseignements sont concrets et actionnables.",
+      "required": true
+    },
+    { "id": "balanced", "label": "Le REX couvre succès et difficultés.", "required": true }
+  ],
+  "completion": {
+    "message": "Le REX est prêt à être partagé et capitalisé pour les projets futurs.",
+    "nextWorkflowSuggestions": ["plan-action"]
+  }
+}

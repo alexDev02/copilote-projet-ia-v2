@@ -1,0 +1,242 @@
+{
+  "id": "preparer-arbitrage",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Préparer un arbitrage",
+    "shortTitle": "Arbitrage",
+    "description": "Structurer une décision à trancher en options comparables, pour faciliter un arbitrage rapide et éclairé.",
+    "category": "gouvernance",
+    "icon": "scale",
+    "difficulty": "avance",
+    "estimatedMinutes": 25,
+    "tags": ["arbitrage", "décision", "gouvernance"]
+  },
+  "objective": {
+    "title": "Faciliter une décision rapide et éclairée",
+    "description": "Un arbitrage mal préparé se transforme en débat sans fin. Le présenter sous forme d'options comparables accélère la décision."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": [
+      "Éléments de contexte de la décision",
+      "Contraintes budgétaires ou délai"
+    ]
+  },
+  "steps": [
+    {
+      "id": "define-decision",
+      "order": 1,
+      "type": "input",
+      "title": "Formuler la décision à trancher",
+      "objective": "Clarifier précisément quelle décision doit être prise, par qui, et pour quand.",
+      "why": "Un arbitrage mal formulé ('on ne sait pas trop quoi faire') ne peut pas être tranché efficacement.",
+      "inputs": [
+        {
+          "id": "decision-question",
+          "label": "Question à trancher",
+          "type": "textarea",
+          "required": true,
+          "placeholder": "Ex : Faut-il décaler la date de livraison de 3 semaines ou réduire le périmètre ?"
+        },
+        {
+          "id": "decision-deadline",
+          "label": "Échéance de la décision",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "documents": [],
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler les éléments factuels nécessaires à la décision.",
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
+      "inputs": [],
+      "documents": [
+        {
+          "label": "Éléments de contexte",
+          "required": false,
+          "purpose": "Base factuelle de la décision."
+        },
+        {
+          "label": "Contraintes budgétaires ou délai",
+          "required": false,
+          "purpose": "Cadrer les options possibles."
+        }
+      ],
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "analyze-options",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Identifier les options possibles",
+      "objective": "Lister les options réalistes, sans se limiter aux deux premières évidentes.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Identifier les options",
+        "purpose": "Élargir l'espace de décision",
+        "template": "Identifie toutes les options réalistes pour trancher cette décision, y compris des options hybrides ou moins évidentes que les deux choix les plus intuitifs. Pour chaque option, décris son principe.",
+        "variables": ["project.name"]
+      },
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
+        "checklist": [
+          {
+            "id": "options-listed",
+            "label": "Plusieurs options réalistes sont identifiées, pas seulement les deux évidentes.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    },
+    {
+      "id": "clarify-questions",
+      "order": 4,
+      "type": "ai_question",
+      "title": "Identifier les informations manquantes",
+      "objective": "Faire remonter les questions nécessaires pour évaluer chaque option équitablement.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Identifier les informations manquantes",
+        "purpose": "Compléter le contexte avant comparaison",
+        "template": "Quelles informations manquent pour évaluer objectivement chacune de ces options (coût, délai, impact qualité, impact équipe) ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "challenge-options",
+      "order": 5,
+      "type": "ai_challenge",
+      "title": "Challenger les options",
+      "objective": "Vérifier qu'aucune option n'est présentée de façon biaisée en faveur d'une préférence implicite.",
+      "why": "Il est facile de présenter inconsciemment l'option préférée sous un jour plus favorable.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Challenger les options",
+        "purpose": "Détecter les biais de présentation",
+        "template": "Challenge cette liste d'options : l'une d'elles est-elle présentée de façon plus favorable sans justification objective ? Chaque option a-t-elle ses inconvénients clairement énoncés, pas seulement ses avantages ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "produce-arbitration-doc",
+      "order": 6,
+      "type": "ai_production",
+      "title": "Construire le support d'arbitrage",
+      "objective": "Générer un support comparatif clair pour faciliter la décision.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Construire le support d'arbitrage",
+        "purpose": "Produire un support de décision",
+        "template": "Construis un support d'arbitrage avec : 1. Rappel de la question à trancher, 2. Tableau comparatif des options (coût, délai, risques, impacts), 3. Recommandation argumentée (signalée explicitement comme une proposition, pas une décision), 4. Ce qui est nécessaire pour trancher en séance.",
+        "variables": ["preferences.detailLevel"]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "finalize",
+      "order": 7,
+      "type": "checklist",
+      "title": "Finaliser et valider",
+      "objective": "Valider humainement le support avant présentation aux décideurs.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de présenter, vérifiez chacun des points suivants.",
+        "checklist": [
+          {
+            "id": "options-balanced",
+            "label": "Les options sont présentées de façon équilibrée.",
+            "required": true
+          },
+          {
+            "id": "recommendation-labeled",
+            "label": "La recommandation est clairement signalée comme une proposition.",
+            "required": true
+          },
+          {
+            "id": "decision-question-clear",
+            "label": "La question à trancher reste formulée sans ambiguïté.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    }
+  ],
+  "finalChecklist": [
+    {
+      "id": "options-balanced",
+      "label": "Les options sont présentées de façon équilibrée.",
+      "required": true
+    },
+    {
+      "id": "recommendation-labeled",
+      "label": "La recommandation est signalée comme une proposition.",
+      "required": true
+    },
+    {
+      "id": "decision-question-clear",
+      "label": "La question à trancher est sans ambiguïté.",
+      "required": true
+    }
+  ],
+  "completion": {
+    "message": "Le support d'arbitrage est prêt à être présenté.",
+    "nextWorkflowSuggestions": ["prepare-copil", "communication-projet"]
+  }
+}

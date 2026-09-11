@@ -1,0 +1,229 @@
+{
+  "id": "preparer-go-live",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Préparer un Go-Live",
+    "shortTitle": "Go-Live",
+    "description": "Évaluer la réelle préparation au déploiement et construire un plan de bascule avec stratégie de retour arrière.",
+    "category": "deploiement",
+    "icon": "rocket",
+    "difficulty": "avance",
+    "estimatedMinutes": 30,
+    "tags": ["go-live", "déploiement", "rollback", "mise en production"]
+  },
+  "objective": {
+    "title": "Sécuriser la mise en production",
+    "description": "Éviter le Go-Live décidé par optimisme collectif plutôt que par une évaluation objective de préparation."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": [
+      "Résultats de recette",
+      "Registre des risques",
+      "Plan de communication de bascule"
+    ]
+  },
+  "steps": [
+    {
+      "id": "define-context",
+      "order": 1,
+      "type": "input",
+      "title": "Définir le contexte de bascule",
+      "objective": "Clarifier la date visée, le périmètre déployé et les parties prenantes impactées.",
+      "inputs": [
+        { "id": "golive-date", "label": "Date de bascule visée", "type": "text", "required": true },
+        { "id": "golive-scope", "label": "Périmètre déployé", "type": "textarea", "required": true }
+      ],
+      "documents": [],
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler les éléments de préparation à la bascule.",
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
+      "inputs": [],
+      "documents": [
+        {
+          "label": "Résultats de recette",
+          "required": false,
+          "purpose": "Objectiver le niveau de qualité réel."
+        },
+        {
+          "label": "Registre des risques",
+          "required": false,
+          "purpose": "Vérifier les risques encore ouverts."
+        }
+      ],
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "analyze-readiness",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Analyser la préparation réelle",
+      "objective": "Évaluer objectivement l'état de préparation, indépendamment de la pression de la date.",
+      "why": "La pression du calendrier pousse souvent à sous-estimer les points bloquants restants.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Analyser la préparation au Go-Live",
+        "purpose": "Évaluation factuelle indépendante du calendrier",
+        "template": "Sur la base des résultats de recette et du registre des risques fournis, évalue objectivement l'état de préparation au Go-Live : anomalies bloquantes ouvertes, risques non mitigés, éléments non testés.",
+        "variables": ["project.name"]
+      },
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
+        "checklist": [
+          {
+            "id": "blocking-issues",
+            "label": "Les anomalies bloquantes ouvertes sont listées.",
+            "required": true
+          },
+          {
+            "id": "open-risks",
+            "label": "Les risques non mitigés sont identifiés.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    },
+    {
+      "id": "clarify-questions",
+      "order": 4,
+      "type": "ai_question",
+      "title": "Identifier les informations manquantes",
+      "objective": "Faire remonter les questions à trancher avant la décision Go/No-Go.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Identifier les informations manquantes",
+        "purpose": "Préparer la décision Go/No-Go",
+        "template": "Quelles informations manquent encore pour prendre une décision Go/No-Go éclairée ? Pose les questions correspondantes.",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "challenge-readiness",
+      "order": 5,
+      "type": "ai_challenge",
+      "title": "Challenger la décision de bascule",
+      "objective": "Confronter la pression du calendrier à la réalité des risques identifiés.",
+      "why": "C'est le moment de poser la question inconfortable : sommes-nous prêts, ou pressés ?",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Challenger la décision de bascule",
+        "purpose": "Confronter calendrier et risques réels",
+        "template": "Challenge cette situation comme un PMO externe et indépendant de la pression du calendrier : les éléments bloquants justifient-ils un report ? Quel est le pire scénario si l'on bascule quand même ? Le plan de retour arrière est-il crédible dans ce scénario ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "produce-cutover-plan",
+      "order": 6,
+      "type": "ai_production",
+      "title": "Construire le plan de bascule",
+      "objective": "Générer le plan de bascule avec étapes, responsables et stratégie de retour arrière.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Construire le plan de bascule",
+        "purpose": "Produire le document opérationnel final",
+        "template": "Construis le plan de bascule avec : 1. Séquence d'étapes de déploiement avec horaires, 2. Responsable par étape, 3. Points de contrôle go/no-go intermédiaires, 4. Stratégie de retour arrière (rollback) et son déclencheur, 5. Plan de communication aux parties prenantes.",
+        "variables": ["preferences.detailLevel"]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "finalize",
+      "order": 7,
+      "type": "checklist",
+      "title": "Finaliser et valider",
+      "objective": "Valider humainement la décision et le plan avant le jour J.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de confirmer le Go-Live, vérifiez chacun des points suivants.",
+        "checklist": [
+          {
+            "id": "rollback-tested",
+            "label": "La stratégie de retour arrière est concrète, pas théorique.",
+            "required": true
+          },
+          {
+            "id": "owners-assigned",
+            "label": "Chaque étape a un responsable identifié.",
+            "required": true
+          },
+          {
+            "id": "go-nogo-explicit",
+            "label": "La décision Go/No-Go est explicite et assumée.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    }
+  ],
+  "finalChecklist": [
+    {
+      "id": "rollback-tested",
+      "label": "La stratégie de retour arrière est concrète.",
+      "required": true
+    },
+    { "id": "owners-assigned", "label": "Chaque étape a un responsable.", "required": true },
+    { "id": "go-nogo-explicit", "label": "La décision Go/No-Go est explicite.", "required": true }
+  ],
+  "completion": {
+    "message": "Le plan de bascule est prêt. Bonne mise en production.",
+    "nextWorkflowSuggestions": ["communication-projet", "rex-projet"]
+  }
+}

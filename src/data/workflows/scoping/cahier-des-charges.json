@@ -1,0 +1,259 @@
+{
+  "id": "cahier-des-charges",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Rédiger un cahier des charges",
+    "shortTitle": "Cahier des charges",
+    "description": "Cadrer précisément un besoin, challenger le périmètre et produire un cahier des charges exploitable.",
+    "category": "cadrage",
+    "icon": "document",
+    "difficulty": "intermediaire",
+    "estimatedMinutes": 30,
+    "tags": ["cahier des charges", "cadrage", "besoin", "périmètre"]
+  },
+  "objective": {
+    "title": "Produire un cahier des charges solide",
+    "description": "Éviter le piège d'un cahier des charges rédigé trop tôt, avant que le besoin et le périmètre ne soient clarifiés."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": [
+      "Notes de cadrage",
+      "Échanges avec le sponsor",
+      "Cahier des charges type de l'entreprise"
+    ]
+  },
+  "steps": [
+    {
+      "id": "define-need",
+      "order": 1,
+      "type": "input",
+      "title": "Formuler le besoin initial",
+      "objective": "Décrire le besoin tel qu'exprimé, avant analyse.",
+      "why": "Le besoin exprimé par le sponsor n'est pas toujours le besoin réel — c'est justement l'objet de l'analyse qui suit.",
+      "inputs": [
+        {
+          "id": "need-description",
+          "label": "Besoin exprimé",
+          "type": "textarea",
+          "required": true,
+          "placeholder": "Ce que le sponsor ou le métier a demandé."
+        },
+        {
+          "id": "known-constraints",
+          "label": "Contraintes connues",
+          "type": "textarea",
+          "required": false,
+          "placeholder": "Délai, budget, contraintes techniques ou réglementaires."
+        }
+      ],
+      "documents": [],
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler les éléments de cadrage disponibles.",
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
+      "inputs": [],
+      "documents": [
+        { "label": "Notes de cadrage", "required": false, "purpose": "Contexte brut du besoin." },
+        {
+          "label": "Cahier des charges type de l'entreprise",
+          "required": false,
+          "purpose": "Aligner la structure sur les standards internes."
+        }
+      ],
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "analyze-need",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Analyser le besoin",
+      "objective": "Distinguer le besoin réel des solutions déjà présupposées, et esquisser un périmètre.",
+      "why": "Un besoin formulé comme une solution ('il nous faut un dashboard') masque souvent le vrai problème à résoudre.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Analyser le besoin",
+        "purpose": "Distinguer besoin réel et solution présupposée",
+        "template": "Analyse ce besoin exprimé : quel est le problème réel à résoudre, indépendamment de la solution évoquée ? Propose un premier périmètre (ce qui est dans le périmètre / hors périmètre) et signale les zones d'ambiguïté.",
+        "variables": ["project.name", "project.objectives"]
+      },
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
+        "checklist": [
+          {
+            "id": "real-need",
+            "label": "Le besoin réel est distingué de la solution présupposée.",
+            "required": true
+          },
+          {
+            "id": "scope-draft",
+            "label": "Un premier périmètre (dans/hors) est esquissé.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    },
+    {
+      "id": "clarify-questions",
+      "order": 4,
+      "type": "ai_question",
+      "title": "Identifier les informations manquantes",
+      "objective": "Faire remonter les questions à poser au sponsor ou au métier avant de figer le périmètre.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Identifier les informations manquantes",
+        "purpose": "Préparer les questions de clarification",
+        "template": "Quelles questions faudrait-il poser au sponsor ou au métier pour lever les ambiguïtés identifiées et figer un périmètre fiable ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "challenge-scope",
+      "order": 5,
+      "type": "ai_challenge",
+      "title": "Challenger le périmètre",
+      "objective": "Détecter les risques de dérive de périmètre et les exigences implicites non formulées.",
+      "why": "La majorité des dérives de projet viennent d'exigences implicites jamais formalisées dans le cahier des charges.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Challenger le périmètre",
+        "purpose": "Détecter les angles morts avant rédaction",
+        "template": "Challenge ce périmètre : quelles exigences implicites ne sont pas formalisées ? Quels éléments hors périmètre risquent d'être réclamés plus tard ? Le périmètre est-il réaliste compte tenu des contraintes ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "produce-document",
+      "order": 6,
+      "type": "ai_production",
+      "title": "Rédiger le cahier des charges",
+      "objective": "Générer le document structuré à partir du périmètre validé et challengé.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Rédiger le cahier des charges",
+        "purpose": "Produire le document final",
+        "template": "Rédige le cahier des charges avec la structure suivante : 1. Contexte et objectifs, 2. Périmètre (dans/hors), 3. Exigences fonctionnelles, 4. Exigences non fonctionnelles (performance, sécurité, ergonomie), 5. Contraintes, 6. Critères d'acceptation, 7. Hypothèses et risques identifiés.",
+        "variables": ["preferences.detailLevel"],
+        "sections": [
+          {
+            "type": "rules",
+            "title": "Règles",
+            "items": [
+              "Ne crée aucune exigence non discutée.",
+              "Signale toute hypothèse comme telle.",
+              "Distingue exigences obligatoires et souhaitables."
+            ]
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "finalize",
+      "order": 7,
+      "type": "checklist",
+      "title": "Finaliser et valider",
+      "objective": "Valider humainement le document avant partage avec les parties prenantes.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de diffuser, vérifiez chacun des points suivants.",
+        "checklist": [
+          {
+            "id": "scope-clear",
+            "label": "Le périmètre dans/hors est sans ambiguïté.",
+            "required": true
+          },
+          {
+            "id": "requirements-testable",
+            "label": "Les exigences sont formulées de façon vérifiable.",
+            "required": true
+          },
+          {
+            "id": "assumptions-flagged",
+            "label": "Les hypothèses sont signalées comme telles.",
+            "required": true
+          },
+          {
+            "id": "no-hallucination",
+            "label": "Aucune exigence n'a été inventée par l'IA.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    }
+  ],
+  "finalChecklist": [
+    {
+      "id": "scope-clear",
+      "label": "Le périmètre dans/hors est sans ambiguïté.",
+      "required": true
+    },
+    { "id": "requirements-testable", "label": "Les exigences sont vérifiables.", "required": true },
+    { "id": "assumptions-flagged", "label": "Les hypothèses sont signalées.", "required": true },
+    {
+      "id": "no-hallucination",
+      "label": "Aucune exigence n'a été inventée par l'IA.",
+      "required": true
+    }
+  ],
+  "completion": {
+    "message": "Le cahier des charges est prêt à être partagé pour validation.",
+    "nextWorkflowSuggestions": ["analyser-besoin", "construire-planning"]
+  }
+}

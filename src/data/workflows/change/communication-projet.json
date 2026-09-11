@@ -1,0 +1,178 @@
+{
+  "id": "communication-projet",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Préparer une communication projet",
+    "shortTitle": "Communication",
+    "description": "Adapter un message projet à son audience, en anticipant les questions et réactions probables.",
+    "category": "change",
+    "icon": "message",
+    "difficulty": "debutant",
+    "estimatedMinutes": 15,
+    "tags": ["communication", "change management", "message"]
+  },
+  "objective": {
+    "title": "Communiquer un message adapté à l'audience",
+    "description": "Un même message projet doit être formulé différemment selon qu'il s'adresse à la direction, aux équipes ou aux utilisateurs finaux."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": [
+      "Éléments factuels à communiquer",
+      "Communication précédente sur le sujet"
+    ]
+  },
+  "steps": [
+    {
+      "id": "define-message",
+      "order": 1,
+      "type": "input",
+      "title": "Définir le message et l'audience",
+      "objective": "Clarifier ce qui doit être communiqué, à qui, et pourquoi maintenant.",
+      "why": "Le même message projet se formule très différemment selon l'audience visée.",
+      "inputs": [
+        {
+          "id": "message-content",
+          "label": "Ce qui doit être communiqué",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "message-audience",
+          "label": "Audience visée",
+          "type": "text",
+          "required": true,
+          "placeholder": "Direction, équipe projet, utilisateurs finaux, client..."
+        },
+        {
+          "id": "message-channel",
+          "label": "Canal",
+          "type": "text",
+          "required": false,
+          "placeholder": "Email, réunion, intranet..."
+        }
+      ],
+      "documents": [],
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler les faits nécessaires pour un message précis.",
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
+      "inputs": [],
+      "documents": [
+        {
+          "label": "Communication précédente sur le sujet",
+          "required": false,
+          "purpose": "Assurer la cohérence du discours dans le temps."
+        }
+      ],
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "produce-message",
+      "order": 3,
+      "type": "ai_production",
+      "title": "Rédiger le message",
+      "objective": "Générer le message adapté au ton et au niveau de détail attendus par l'audience.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Rédiger le message",
+        "purpose": "Produire un message adapté à l'audience",
+        "template": "Rédige un message destiné à : {{step.title}}, communiquant l'information suivante de façon claire et adaptée à cette audience, en anticipant ses préoccupations probables.",
+        "variables": ["step.title", "preferences.communicationStyle"]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "review-message",
+      "order": 4,
+      "type": "ai_review",
+      "title": "Anticiper les réactions",
+      "objective": "Identifier les questions ou objections probables et vérifier que le message y répond déjà.",
+      "why": "Un message qui suscite immédiatement les mêmes trois questions n'est pas encore complet.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Anticiper les réactions",
+        "purpose": "Contrôle qualité avant envoi",
+        "template": "Relis ce message en te mettant à la place de l'audience visée : quelles questions ou objections va-t-il immédiatement susciter ? Le message y répond-il déjà, ou faut-il l'ajuster ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "finalize",
+      "order": 5,
+      "type": "checklist",
+      "title": "Finaliser et envoyer",
+      "objective": "Valider le message avant diffusion.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant d'envoyer, vérifiez chacun des points suivants.",
+        "checklist": [
+          { "id": "tone-adapted", "label": "Le ton est adapté à l'audience.", "required": true },
+          {
+            "id": "objections-anticipated",
+            "label": "Les objections probables sont anticipées.",
+            "required": true
+          },
+          {
+            "id": "facts-verified",
+            "label": "Les faits communiqués sont vérifiés.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    }
+  ],
+  "finalChecklist": [
+    { "id": "tone-adapted", "label": "Le ton est adapté à l'audience.", "required": true },
+    {
+      "id": "objections-anticipated",
+      "label": "Les objections probables sont anticipées.",
+      "required": true
+    },
+    { "id": "facts-verified", "label": "Les faits communiqués sont vérifiés.", "required": true }
+  ],
+  "completion": {
+    "message": "Le message est prêt à être diffusé.",
+    "nextWorkflowSuggestions": ["preparer-reunion"]
+  }
+}

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+COMMIT_MESSAGE="${1:-Mise à jour Copilote Projet IA}"
+
 echo "→ Installation des dépendances..."
 npm install
 
@@ -15,7 +17,7 @@ npm run build
 
 echo "→ Commit et push..."
 git add -A
-git commit -m "Lot 1+2 : socle + moteur workflow + workflow COPIL complet"
+git commit -m "$COMMIT_MESSAGE"
 git push
 
-echo "✓ Déploiement lancé. Suivez l'onglet Actions sur GitHub pour la mise en ligne."
+echo "✓ Déploiement lancé (\"$COMMIT_MESSAGE\"). Suivez l'onglet Actions sur GitHub pour la mise en ligne."

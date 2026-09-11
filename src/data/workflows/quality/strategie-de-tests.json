@@ -1,0 +1,242 @@
+{
+  "id": "strategie-de-tests",
+  "version": "1.0",
+  "status": "published",
+  "metadata": {
+    "title": "Préparer une stratégie de tests",
+    "shortTitle": "Stratégie de tests",
+    "description": "Définir une stratégie de tests priorisée par le risque, plutôt qu'une couverture uniforme et coûteuse.",
+    "category": "qualite",
+    "icon": "check",
+    "difficulty": "avance",
+    "estimatedMinutes": 30,
+    "tags": ["tests", "qualité", "stratégie", "recette"]
+  },
+  "objective": {
+    "title": "Prioriser les tests par le risque",
+    "description": "Éviter deux pièges symétriques : la sous-couverture des zones critiques et la sur-couverture des zones à faible risque."
+  },
+  "prerequisites": {
+    "contextRequired": true,
+    "documentsRecommended": [
+      "Cahier des charges ou user stories",
+      "Architecture technique",
+      "Historique des anomalies (si projet existant)"
+    ]
+  },
+  "steps": [
+    {
+      "id": "define-scope",
+      "order": 1,
+      "type": "input",
+      "title": "Définir le périmètre à tester",
+      "objective": "Clarifier ce qui doit être couvert par la stratégie de tests et les contraintes de délai.",
+      "inputs": [
+        {
+          "id": "test-scope",
+          "label": "Périmètre fonctionnel à tester",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "test-constraints",
+          "label": "Contraintes (délai, environnements disponibles)",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "documents": [],
+      "navigation": {
+        "allowBack": false,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "prepare-documents",
+      "order": 2,
+      "type": "documents",
+      "title": "Préparer les informations",
+      "objective": "Rassembler les éléments fonctionnels et techniques nécessaires.",
+      "instructions": {
+        "action": "Ajoutez ces documents directement dans votre conversation avec votre IA."
+      },
+      "inputs": [],
+      "documents": [
+        {
+          "label": "Cahier des charges ou user stories",
+          "required": false,
+          "purpose": "Identifier les fonctionnalités à couvrir."
+        },
+        {
+          "label": "Architecture technique",
+          "required": false,
+          "purpose": "Identifier les zones de complexité technique à risque."
+        },
+        {
+          "label": "Historique des anomalies",
+          "required": false,
+          "purpose": "Cibler les zones historiquement fragiles."
+        }
+      ],
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "analyze-risk-areas",
+      "order": 3,
+      "type": "ai_task",
+      "title": "Identifier les zones à risque",
+      "objective": "Cartographier les fonctionnalités par niveau de risque (criticité métier x complexité technique).",
+      "why": "La priorisation par le risque est ce qui distingue une stratégie de tests d'une simple liste de cas de tests.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Identifier les zones à risque",
+        "purpose": "Prioriser l'effort de test",
+        "template": "Analyse le périmètre fonctionnel fourni et classe chaque fonctionnalité selon deux axes : criticité métier (impact si ça casse) et complexité technique (probabilité que ça casse). Identifie les zones prioritaires pour l'effort de test.",
+        "variables": ["project.name"]
+      },
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de continuer, vérifiez que l'analyse contient les éléments suivants.",
+        "checklist": [
+          {
+            "id": "risk-mapped",
+            "label": "Chaque fonctionnalité est positionnée sur criticité et complexité.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    },
+    {
+      "id": "clarify-questions",
+      "order": 4,
+      "type": "ai_question",
+      "title": "Identifier les informations manquantes",
+      "objective": "Faire remonter les questions nécessaires (environnements, données de test, niveaux de test disponibles).",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Identifier les informations manquantes",
+        "purpose": "Compléter le contexte avant de définir la stratégie",
+        "template": "Quelles informations te manquent pour définir une stratégie de tests réaliste : environnements disponibles, données de test, outils d'automatisation, niveaux de test déjà en place ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "challenge-coverage",
+      "order": 5,
+      "type": "ai_challenge",
+      "title": "Challenger la couverture",
+      "objective": "Vérifier l'absence de trous de couverture sur les zones critiques et de sur-investissement sur les zones à faible risque.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Challenger la couverture de tests",
+        "purpose": "Détecter les angles morts",
+        "template": "Challenge cette priorisation : une zone à fort impact métier est-elle sous-couverte ? À l'inverse, y a-t-il un risque de sur-investir sur une zone à faible risque par facilité ? Quels scénarios de non-régression sont indispensables ?",
+        "variables": []
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "produce-strategy",
+      "order": 6,
+      "type": "ai_production",
+      "title": "Rédiger la stratégie de tests",
+      "objective": "Générer le document de stratégie avec niveaux de test, priorités et critères de sortie.",
+      "inputs": [],
+      "documents": [],
+      "prompt": {
+        "title": "Rédiger la stratégie de tests",
+        "purpose": "Produire le document final",
+        "template": "Rédige la stratégie de tests avec : 1. Objectifs de la campagne, 2. Niveaux de test (unitaire, intégration, fonctionnel, non-régression), 3. Priorisation par zone de risque, 4. Environnements et données nécessaires, 5. Critères de sortie (definition of done qualité), 6. Risques résiduels acceptés.",
+        "variables": ["preferences.detailLevel"]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": false
+      }
+    },
+    {
+      "id": "finalize",
+      "order": 7,
+      "type": "checklist",
+      "title": "Finaliser et valider",
+      "objective": "Valider humainement la stratégie avant partage avec l'équipe QA.",
+      "inputs": [],
+      "documents": [],
+      "validation": {
+        "required": true,
+        "humanValidationRequired": true,
+        "instruction": "Avant de diffuser, vérifiez chacun des points suivants.",
+        "checklist": [
+          {
+            "id": "critical-covered",
+            "label": "Les zones critiques sont couvertes en priorité.",
+            "required": true
+          },
+          {
+            "id": "exit-criteria",
+            "label": "Les critères de sortie sont explicites.",
+            "required": true
+          },
+          {
+            "id": "residual-risks",
+            "label": "Les risques résiduels acceptés sont assumés explicitement.",
+            "required": true
+          }
+        ]
+      },
+      "navigation": {
+        "allowBack": true,
+        "allowExit": true,
+        "saveProgress": true,
+        "requireValidation": true
+      }
+    }
+  ],
+  "finalChecklist": [
+    {
+      "id": "critical-covered",
+      "label": "Les zones critiques sont couvertes en priorité.",
+      "required": true
+    },
+    { "id": "exit-criteria", "label": "Les critères de sortie sont explicites.", "required": true },
+    {
+      "id": "residual-risks",
+      "label": "Les risques résiduels acceptés sont assumés.",
+      "required": true
+    }
+  ],
+  "completion": {
+    "message": "La stratégie de tests est prête à être partagée avec l'équipe QA.",
+    "nextWorkflowSuggestions": ["analyser-anomalie", "preparer-go-live"]
+  }
+}
